@@ -8,7 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 84px;
+  height: 81px;
   border-bottom: .5px solid lightgray;
   margin-inline: auto;
 }
@@ -16,8 +16,8 @@ body {
 .inner-header {
   display: flex;
   justify-content: space-between;
-  height: 52px;
-  width: 1540px;
+  height: 81px;
+  width: 100%;
   max-width: 1200px;
   box-sizing: border-box;
   background-color: white;
@@ -97,6 +97,8 @@ body {
   transition: all 0.3s ease;
   background-color: transparent;
   color: inherit;
+  position: relative;
+  overflow: hidden;
 }
 
 .header-button:hover {
@@ -104,7 +106,7 @@ body {
 }
 
 .header-right > .now-start {
-  width: 188px;
+  width: 200px;
   background-color: black;
   color: white;
 }
@@ -130,3 +132,27 @@ body {
 .header-right > .ask-to-team:hover::after{
   transform: scaleY(1);
 }
+
+.arrow-icon {
+  position: absolute;
+  inset: auto auto auto -24px;
+  opacity: 0;
+  transition: left 0.3s ease, opacity 0.3s ease;
+  
+}
+
+.header-button:hover .arrow-icon {
+  opacity: 1;
+  left: 4px;
+}
+
+.button-text {
+  position: relative;
+  transition: left 0.3s ease;
+  left: 0;
+}
+
+.header-button:hover .button-text {
+  left: 8px;
+}
+
