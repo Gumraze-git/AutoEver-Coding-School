@@ -180,3 +180,108 @@ body {
 .header-button:hover .button-text {
   left: 8px;
 }
+
+/* main */
+main {
+  display: flex;
+  justify-content: center;
+}
+
+/* hero section */
+.hero-content {
+  margin: 0 auto;
+  width: 1540px;
+}
+
+.hero-primary {
+  display: grid;
+  grid-template-areas: "text illu";
+  grid-template-columns: 1fr 1fr;
+  column-gap: calc(var(--f-col-width) * 2);
+}
+
+.hero-secondary {
+  grid-area: text;
+}
+
+.hero-illu {
+  grid-area: illu;
+  margin-left: 50px;
+}
+
+.illu-inner img {
+  width: 800px;
+}
+
+.hero-text {
+  grid-area: text;
+  font-optical-sizing: auto;
+  display: block;
+  width: 770px;
+  margin-top: 64px;
+  margin-bottom: 120px;
+}
+
+.hero-text > h1 {
+  line-height: 1;
+  margin-top: 0px;
+  margin-bottom: 24px;
+  text-wrap: balance;
+  font-size: 86px;
+  letter-spacing: -1.72px;
+  font-weight: 400;
+  font-variation-settings: "wdth" 96, "wght" 400;
+}
+
+.hero-text > p {
+  font-size: 26px;
+  letter-spacing: -0.26px;
+  font-variation-settings: "wdth" 98, "wght" 340;
+  margin: 0 auto;
+  font-weight: 340;
+}
+
+.hero-btn {
+  margin-top: 32px;
+}
+
+.hero-btn-inner {
+  display: flex;
+  gap: 16px 24px;
+}
+
+.hero-btn-inner > a {
+  text-decoration: none;
+  padding: 12px 21px 12px 21px;
+}
+
+.hero-now-start {
+  display: flex;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  transition: border-radius 160ms ease;
+}
+
+.hero-now-start:hover {
+  border-radius: 0px;
+}
+
+.hero-ask-to-team {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2.25px solid;
+  color: #000000;
+  transition: border-radius 160ms ease;
+}
+
+.hero-ask-to-team:hover {
+  border-radius: 0px;
+}
+
+.btn-inner {
+  font-size: 1.25rem;
+  justify-content: center;
+  align-items: center;
+}
