@@ -23,6 +23,7 @@ function isValueValid(input, inspector) {
   if (inspector.test(input.value)) {
     span.innerText = "사용 가능 합니다."
     span.style.color = "green"
+    input.style.backgroundColor = "#E0F2FE"
     return true
   } else {
     span.innerText = "사용 불가 합니다."    
