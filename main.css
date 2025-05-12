@@ -781,3 +781,68 @@ main {
   margin-left: 5px;
   border-bottom: 1px solid black;
 }
+
+.fif-section {
+  background-color: #E4FF97;
+  padding: 120px 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.fif-section-box {
+  margin: 0px 200px;
+}
+
+.fif-section-box-text {
+  margin-bottom: 80px;
+  width: 840px;
+  
+}
+
+.fif-section-box-text > h2 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.0525rem;
+  font-weight: 400;
+  font-variation-settings: "wdth" 96, "wght" 400;
+  margin: 0;
+  display: inline;
+}
+
+.fif-section-box-text > p {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.0525rem;
+  margin: 0;
+  display: inline;
+  font-weight: 100;
+}
+
+.fif-section-video-box > img{
+  width: 1320px;
+}
+
+.fif-section-sub-title-box {
+  display: flex;
+  gap: 30px;
+  margin-top: 48px;
+}
+
+.fif-section-sub-title > h3 {
+  font-size: 1.5rem;
+  line-height: 1.35;
+  letter-spacing: -0.015rem;
+  font-weight: 520;
+  font-variation-settings: "wdth" 98, "wght" 520;
+  margin: 0;
+  display: inline;
+}
+
+.fif-section-sub-title > p {
+  margin: 0;
+  display: inline;
+  font-weight: 340;
+  font-variation-settings: "wdth" 98, "wght" 340;
+  font-size: 1.5rem;
+  letter-spacing: -0.0075rem;
+}
