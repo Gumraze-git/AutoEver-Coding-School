@@ -77,8 +77,6 @@ input::placeholder {
   font-size: 14px;
 }
 
-
-
 .admission {
   width: 400px;
   height: 50px;
@@ -88,6 +86,10 @@ input::placeholder {
   font-size: 18px;
   font-weight: 500;
   border-radius: 8px;
+}
+
+.admission:disabled {
+  background-color: grey;
 }
 
 .ankers {
@@ -101,26 +103,6 @@ input::placeholder {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.links > a{
-  margin-bottom: 20px;
-  color: #007be5;
-}
-
-.account {
-  display: flex;
-  justify-content: center;
-}
-
-.account > p {
-  margin: 0;
-  color: grey;
-}
-
-.account > a {
-  color: #007be5;
-  margin-left: 2px;
 }
 
 footer {
