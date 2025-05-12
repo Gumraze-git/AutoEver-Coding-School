@@ -96,6 +96,7 @@ input:hover {
   font-weight: 500;
   border-radius: 8px;
   margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .admission:disabled {
@@ -120,6 +121,7 @@ footer {
   display: flex;
   justify-content: center;
   color: grey;
+  margin-top: 60px;
 }
 
 
