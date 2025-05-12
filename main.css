@@ -491,6 +491,25 @@ main {
   }
 }
 
+/* banner section */
+.banner-section {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 40px 0px;
+}
+
+.banner-box {
+  display: flex;
+  animation: scrollLeft 60s linear infinite;
+  gap: 80px;
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0);}
+  100% { transform: translateX(-100%);}
+}
+
 /* third section */
 .thi-section {
   background-color: #CB9FD2;
@@ -576,6 +595,7 @@ main {
 .thi-section-list > a > span{
   color: #000000;
 }
+
 
 
 
