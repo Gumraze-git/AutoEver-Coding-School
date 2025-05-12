@@ -59,6 +59,7 @@ input {
   transform: border 0.3s ease;
   padding-left: 12px;
   font-weight: 500;
+  font-size: 18px;
 }
 
 input::placeholder {
@@ -66,6 +67,7 @@ input::placeholder {
   bottom: 12px;
   right: 3px;
   color: black;
+  font-size: 16px;
 }
 
 input:hover {
