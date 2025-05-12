@@ -1,6 +1,6 @@
 // 정규 표현식
 const emailReg = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
-const passwordReg = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
+const passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const phoneReg = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 // 버튼 감지
