@@ -513,7 +513,8 @@ main {
 /* third section */
 .thi-section {
   background-color: #CB9FD2;
-  padding: 120px;
+  padding: 0;
+  padding-top: 120px;
 }
 
 .thi-section-body {
@@ -547,7 +548,7 @@ main {
 .thi-section-grid-box {
   display: grid;
   grid-template-columns: 516px;
-  gap: calc(min(100vw, 1440px) / 48);
+  gap: 240px;
   text-rendering: optimizeLegibility;
 }
 
@@ -558,8 +559,7 @@ main {
 
 .thi-section-list-box {
   margin-bottom: 4rem;
-  
-  height: 500px;
+  width: 600px;
 }
 
 .thi-section-img-box {
@@ -596,6 +596,53 @@ main {
   color: #000000;
 }
 
+.thi-text {
+  font-size: 24px;
+  font-weight: 540;
+  font-variation-settings: "wdth" 98, "wght" 540;
+  letter-spacing: -0.015rem;
+  line-height: 1.35;
+  font-optical-sizing: auto;
+}
 
+.list-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
 
+.thi-section-text > div {
+  display: flex;
+  align-items: center;
+}
 
+.thi-section-subtext {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.thi-section-text-box {
+  overflow: hidden;
+}
+
+.thi-section-text-box span{
+  position: relative;
+  right: 40px;
+  transition: right .5s ease;
+}
+
+.thi-section-text-box svg {
+  position: relative;
+  right: 32px;
+  transition: right .5s ease;
+}
+
+.thi-section-text-box:hover span{
+  position: relative;
+  right: 0px;
+}
+
+.thi-section-text-box:hover svg {
+  position: relative;
+  right: 0px;
+}
