@@ -1,5 +1,8 @@
 /* root setting */
 :root {
+  /* font settings */
+  --f-font-sans: '__figmaSans_a26a19', '__figmaSans_Fallback_a26a19', SF Pro Display, system-ui, helvetica, sans-serif;
+
   /* overlay settings */
   --f-statsig-overlay: #FFFFFF;
 
@@ -59,8 +62,21 @@
 }
 
 html {
-  box-sizing: border-box;
+  /* font */
+  font-family: var(--f-font-sans) ;
   font-style: normal;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+
+  /* color */
+  color: #000000;
+
+  /* sizing */
+  box-sizing: border-box;
 }
 
 *, *::before, *::after {
@@ -69,10 +85,6 @@ html {
 
 /* body */
 body {
-  font-family: 'Inter', 'Noto Sans KR', sans-serif, Helvetica;
-  overflow: auto;
-  display: block;
-  width: 100vw;
   overflow: auto;
   padding-bottom: 0px;
   margin: 0;
