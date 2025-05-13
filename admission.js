@@ -43,3 +43,13 @@ function updateSubmitBtn() {
 email.addEventListener("input", updateSubmitBtn);
 password.addEventListener("input", updateSubmitBtn);
 phone.addEventListener("input", updateSubmitBtn);
+
+// 버튼이 눌리면 필드의 값들을 localStorage에 저장
+admitBtn.addEventListener("click", () => {
+  localStorage.setItem("email", email.value)
+  localStorage.setItem("password", password.value)
+  localStorage.setItem("phone", phone.value)
+
+  alert(`회원 가입이 성공적으로 되었습니다.`)
+  window.location.href = "login.html";
+})
