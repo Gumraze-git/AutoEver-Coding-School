@@ -135,6 +135,10 @@ footer {
   transition: border-radius .3s ease;
 }
 
+.login:disabled {
+  background-color: grey;
+}
+
 .login:hover {
   border-radius: 0px;
 }
