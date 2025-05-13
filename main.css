@@ -53,6 +53,13 @@
   }
 }
 
+@media (max-width: 1280px) {
+  .header-left > nav {
+    display: none;
+  }
+}
+
+/* width 960px */
 @media (min-width: 960px) {
   :root {
     --f-lego-block-padding: 7.5rem;
@@ -363,31 +370,20 @@ body {
   border-radius: 0;
 }
 
-
-
-/* .header-right > .ask-to-team {
-  position: relative;
-  height: auto;
+.hamburger-icon-box {
+  appearance: none;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  margin-inline: 0.75rem -0.625rem;
+  padding: 8px;
 }
-
-.header-right > .ask-to-team::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: black;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.3s ease;
-}
-
-.header-right > .ask-to-team:hover::after{
-  transform: scaleY(1);
-} */
-
-
 
 /* main */
 main {
