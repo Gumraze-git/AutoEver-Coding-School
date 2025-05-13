@@ -13,7 +13,7 @@ body {
   font-family: 'Inter', 'Noto Sans KR', sans-serif, Helvetica;
   overflow: auto;
   display: block;
-  width: 100%;
+  width: 100vw;
 }
 
 .app {
@@ -845,4 +845,17 @@ main {
   font-variation-settings: "wdth" 98, "wght" 340;
   font-size: 1.5rem;
   letter-spacing: -0.0075rem;
+}
+
+/* sixth section */
+.six-section-box-image > svg{
+  color: #33DFDF;
+}
+
+.six-section-pata-logo {
+  height: 40px;
+}
+
+.six-section-border {
+  color: #33DFDF;
 }
