@@ -13,9 +13,697 @@
 </head>
 <body>
   <div class="app">
-    <iframe src="partials/header.html" class="header"></iframe>
-    <iframe src="partials/hero.html" class="hero"></iframe>
-    <iframe src="partials/footer.html" class="footer"></iframe>
+    <div class="outer-header">
+      <header class="header">
+        <div class="inner-header">
+          <div class="header-left">
+            <a href="" class="logo">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                   width="26" 
+                   height="40" 
+                   fill="none" 
+                   viewBox="0 0 480 720" 
+                   aria-label="홈페이지">
+                   <path fill="#24CB71" d="M0 600c0-66.274 53.726-120 120-120h120v120c0 66.274-53.726 120-120 120S0 666.274 0 600"/>
+                   <path fill="#FF7237" d="M240 0v240h120c66.274 0 120-53.726 120-120S426.274 0 360 0z"/>
+                   <circle cx="359" cy="360" r="120" fill="#00B6FF"/>
+                   <path fill="#FF3737" d="M0 120c0 66.274 53.726 120 120 120h120V0H120C53.726 0 0 53.726 0 120"/>
+                   <path fill="#874FFF" d="M0 360c0 66.274 53.726 120 120 120h120V240H120C53.726 240 0 293.726 0 360"/></svg>
+            </a>
+            <nav>
+              <ul class="header-left-nav">
+                <li>
+                  <div class="header-left-nav-box">
+                    <button class="header-left-nav-box-btn">
+                      <span class="nav-highlight">제품</span>
+                      <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M18.4 9.4 12 15.9 5.6 9.4l.8-.8L12 14.2l5.6-5.6z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <div class="header-left-nav-box">
+                    <button class="header-left-nav-box-btn">  
+                      <span class="nav-highlight">솔루션</span>
+                      <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M18.4 9.4 12 15.9 5.6 9.4l.8-.8L12 14.2l5.6-5.6z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <div class="header-left-nav-box">
+                    <button class="header-left-nav-box-btn">
+                      <span class="nav-highlight">커뮤니티</span>
+                      <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M18.4 9.4 12 15.9 5.6 9.4l.8-.8L12 14.2l5.6-5.6z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <div class="header-left-nav-box">
+                    <button class="header-left-nav-box-btn">
+                      <span class="nav-highlight">리소스</span>
+                      <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M18.4 9.4 12 15.9 5.6 9.4l.8-.8L12 14.2l5.6-5.6z"/>
+                  </svg>
+                </li>
+                <li>
+                  <span class="nav-highlight">가격</span>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <ul class="header-right">
+            <li>
+              <a href="" class="ask-to-team">
+                <span class="nav-highlight">영업팀에 문의</span>
+              </a>
+            </li>
+            <li class="header-right-btn">
+              <a href="login.html" class="login">
+                <span>
+                  <svg class = "arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                  <span class="button-text">로그인</span>
+                </span>
+              </a>
+            </li>
+            <li class="header-right-btn">
+              <a href="" class="login now-start">
+                <span>
+                  <svg class = "arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                  <span class="button-text">지금 무료 시작하기</span>
+                </span>
+              </a>
+            </li>
+            <button class="hamburger-icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21 16H3v-1h18zM21 9H3V8h18z" clip-rule="evenodd"></path></svg>
+            </button>
+          </ul>
+      </header>
+    </div>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-primary">
+            <div class="hero-illu">
+              <div class="illu-inner">
+                <img src="./image/single-frame.png" alt="image">
+              </div>
+            </div>
+            <div class="hero-text">              
+                <h1>더 커진 생각. 더 빨라진 완성 속도.</h1>
+                <p>Figma는 디자이너와 개발자가 협업하여 뛰어난 제품을 만들 수 있도록 지원합니다.</p>
+                <div class="hero-btn">
+                  <div class="hero-btn-inner">
+                    <a href="" class="hero-now-start">
+                      <span class="btn-inner">지금 무료 시작하기</span>
+                    </a>
+                    <a href="" class="hero-ask-to-team">
+                      <span class="btn-inner ">영업팀에 문의</span>
+                    </a>
+                  </div>
+                </div>              
+            </div>
+          </div>
+          <div class="hero-secondary">
+            <div class="hero-image">
+              <div class="hero-image-inner">
+                <img src="./image/hero-second-img.png" alt="second-img">
+              </div>
+            </div>
+            <div class="hero-buttons">
+              <div class="hero-tab-list">
+                <button type="button" role="tab" class = "hero-design">디자인</button>
+                <button type="button" role="tab" class = "hero-draw">그리기</button>
+                <button type="button" role="tab" class = "hero-dev">개발</button>
+                <button type="button" role="tab" class = "hero-post">게시</button>
+                <button type="button" role="tab" class = "hero-prom">홍보</button>
+                <button type="button" role="tab" class = "hero-cowork">협업</button>
+                <button type="button" role="tab" class = "hero-present">프레젠테이션</button>
+              </div>
+              <div class="hero-desc-box">
+                <div class="hero-desc-inner">
+                  <p class="hero-desc-text">하나의 공유 디자인 파일에서 팀과 함께 제품을 디자인하고 개선해보아요</p>
+                  <a href="https://www.figma.com/ko-kr/design/" class="hero-desc-btn">
+                    <span>Figma Design 살펴보기</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sec-section">
+        <div class="sec-section-box">
+          <figure class="sec-section-box-inner">
+            <div class="sec-box-image">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="56" fill="currentColor" viewBox="0 0 64 56" aria-hidden="true" ><g fill="currentColor"><path d="M29.866 0v24.286H14.79V26h.143c8.246 0 14.93 6.715 14.93 15 0 8.283-6.684 14.999-14.93 14.999C6.685 56 0 49.284 0 41q0-.215.006-.428H0V17.143C0 7.675 7.64 0 17.064 0zM64 0v24.286H48.923V26h.142c8.247 0 14.931 6.715 14.931 15 0 8.283-6.684 14.999-14.93 14.999-8.247 0-14.932-6.716-14.932-15q0-.215.006-.428h-.006V17.143C34.134 7.675 41.774 0 51.198 0z"></path></g></svg>
+              <blockquote>
+                <div><p class="sec-box-image-text">Figma에서 디자이너와 개발자는 필요한 거의 모든 것을 사용할 수 있습니다.</p></div>
+              </blockquote>
+            </div>
+            <figcaption>
+              <img src="./image/github-logo.svg" alt="git logo" class="sec-section-git-logo">
+              <div class="figcaption-de-leader">
+                <div class="avatar-wrapper">
+                  <div class="avatar-border"></div>
+                  <img class="leader-photo" src="./image/design-lead.avif" alt="">
+                </div>
+                <div class="figcaption-text">
+                  <p>
+                    <p class="figcaption-text-name">Diana Mounter</p>
+                    <p class="figcaption-text-title">디자인 책임자</p>
+                  </p>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="banner-section">
+        <div class="banner-box">
+          <img src="./image/microsoft.svg" alt="microsoft">
+          <img src="./image/slack.svg" alt="slack">
+          <img src="./image/rakuten.svg" alt="rakuten">
+          <img src="./image/unknown-logo.svg" alt="unknown-logo">
+          <img src="./image/zoom.svg" alt="zoom">
+          <img src="./image/dropbox.svg" alt="dropbox">
+          <img src="./image/basic.svg" alt="basic">
+          <img src="./image/airbnb.svg" alt="airbnb">
+          <img src="./image/onemeical.svg" alt="onemeical">
+          <img src="./image/patagonia.svg" alt="patagonia">
+          <img src="./image/the-newyork-times.svg" alt="the-newyork-times">
+          <img src="./image/voda.svg" alt="voda">
+          <img src="./image/walgreen.svg" alt="walgreen">
+          <img src="./image/herman-miller.svg" alt="herman-miller">
+          <img src="./image/coinbase.svg" alt="coinbase">
+          <img src="./image/braintree.svg" alt="braintree">
+          <img src="./image/asana.svg" alt="asana">
+          <img src="./image/altassian.svg" alt="altassian">
+          <img src="./image/github-logo.svg" alt="github-logo">
+        </div>
+
+        <div class="banner-box">
+          <img src="./image/microsoft.svg" alt="microsoft">
+          <img src="./image/slack.svg" alt="slack">
+          <img src="./image/rakuten.svg" alt="rakuten">
+          <img src="./image/unknown-logo.svg" alt="unknown-logo">
+          <img src="./image/zoom.svg" alt="zoom">
+          <img src="./image/dropbox.svg" alt="dropbox">
+          <img src="./image/basic.svg" alt="basic">
+          <img src="./image/airbnb.svg" alt="airbnb">
+          <img src="./image/onemeical.svg" alt="onemeical">
+          <img src="./image/patagonia.svg" alt="patagonia">
+          <img src="./image/the-newyork-times.svg" alt="the-newyork-times">
+          <img src="./image/voda.svg" alt="voda">
+          <img src="./image/walgreen.svg" alt="walgreen">
+          <img src="./image/herman-miller.svg" alt="herman-miller">
+          <img src="./image/coinbase.svg" alt="coinbase">
+          <img src="./image/braintree.svg" alt="braintree">
+          <img src="./image/asana.svg" alt="asana">
+          <img src="./image/altassian.svg" alt="altassian">
+          <img src="./image/github-logo.svg" alt="github-logo">
+        </div>
+        
+      </section>
+      <section class="thi-section">
+        <div class="thi-section-body">
+          <div class="thi-section-title-box">
+            <h2 class="thi-section-title">완전히 새로운 디자인 방법.</h2>
+            <p class="thi-section-subtitle">자유롭게 아이디어를 탐색하고 빠르게 작업을 반복하세요.</p>
+          </div>
+
+          <div class="thi-section-grid-box">
+            <div class="thi-section-list-box">
+              <div class="thi-section-list">
+                <h3 class="thi-section-text">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" style="clip-path: inset(0px);" class="list-icon"><g clip-path="url(#a)"><path fill="currentColor" d="M15.2 20.8v-1.075l.76.76a3.2 3.2 0 1 0 4.525-4.525l-.76-.76H20.8a3.2 3.2 0 0 0 0-6.4h-1.075l.76-.76a3.2 3.2 0 1 0-4.525-4.525l-.76.76V3.2a3.2 3.2 0 0 0-6.4 0v1.075l-.76-.76A3.2 3.2 0 1 0 3.515 8.04l.76.76H3.2a3.2 3.2 0 0 0 0 6.4h1.075l-.76.76a3.2 3.2 0 0 0 4.525 4.525l.76-.76V20.8a3.2 3.2 0 0 0 6.4 0"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+                    <span class="thi-text">AI 기능으로 간편해진 UI 생성</span>
+                  </div>
+                </h3>
+                <p class="thi-section-subtext">디자인 목업을 즉시 생성하고 다양한 옵션을 살펴보세요.</p>
+                <a href=""><span>자세히 알아보기</span></a>
+              </div>
+              <div class="thi-section-list">
+                <h3 class="thi-section-text">
+                  <div class="thi-section-text-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="list-icon"><path fill="currentColor" d="M22.4 24H1.6V8.8H6A.4.4 0 0 0 6 8h-.4a4 4 0 1 1 0-8h12.8a4 4 0 0 1 0 8H18a.4.4 0 0 0 0 .8h4.4z"></path></svg>
+                    <span class="thi-text">자동 레이아웃으로 디자인의 일관성 유지</span>
+                  </div>
+                </h3>
+              </div>
+              <div class="thi-section-list">
+                <h3 class="thi-section-text">
+                  <div class="thi-section-text-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="list-icon"><g clip-path="url(#a)"><path fill="currentColor" d="M11.937 20.21 9.749 24H4.44a4.44 4.44 0 0 1-2.312-8.231A4.4 4.4 0 0 1 0 12c0-1.599.853-2.998 2.128-3.769A4.44 4.44 0 0 1 4.44 0h5.164l2.333 4.04L14.27 0h5.29a4.44 4.44 0 0 1 2.312 8.231A4.4 4.4 0 0 1 24 12a4.4 4.4 0 0 1-2.128 3.769A4.44 4.44 0 0 1 19.56 24h-5.435z"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+                    <span class="thi-text">즉시 편집 규모 확장</span>
+                  </div>
+                </h3>
+              </div>
+              <div class="thi-section-list">
+                <h3 class="thi-section-text">
+                  <div class="thi-section-text-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="list-icon"><g fill="currentColor" clip-path="url(#a)"><circle cx="5.84" cy="5.84" r="5.84" transform="matrix(0 -1 -1 0 11.68 23.6)"></circle><path d="M9.04 15.44v-8.4h-6.4v8.4z"></path><circle cx="5.84" cy="5.84" r="5.84" transform="matrix(0 -1 -1 0 24 23.6)"></circle><path d="M21.36 15.44v-8.4h-6.4v8.4z"></path><path d="M24 11.2C24 5.235 19.165.4 13.2.4h-2.4C4.835.4 0 5.235 0 11.2z"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+                    <span class="thi-text">AI를 활용한 프로토타입 제작</span>
+                  </div>
+                </h3>
+              </div>
+              <div class="thi-section-list">
+                <h3 class="thi-section-text">
+                  <div class="thi-section-text-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="list-icon"><g clip-path="url(#a)"><path fill="currentColor" fill-rule="evenodd" d="M24.014 24.04V12.043c0-6.629-5.373-12.003-12-12.003-6.628 0-12 5.374-12 12.003v4.055a7.867 7.867 0 1 0 15.732 0V12.12a3.696 3.696 0 1 0-7.39 0v3.977a.475.475 0 1 1-.952 0v-4.055a4.61 4.61 0 1 1 9.219 0V24.04z" clip-rule="evenodd"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+                    <span class="thi-text">프로토타입이 임베드된 프레젠테이션</span>
+                  </div>
+                </h3>
+              </div>
+            </div>
+            <div class="thi-section-img-box"><img class="phone-image" src="./image/phone.avif" alt=""></div>
+          </div>
+        </div>
+      </section>
+      <section class="four-section">
+        <div class="four-section-box">
+          <div class="four-section-text-box">
+            <h2>하나가 된 디자인과 개발 프로세스.</h2>
+            <p>개발자를 위해 설계된 워크플로우에서 디자인을 코드로 쉽게 변환하세요.</p>
+          </div>
+          <div class="fout-section-image-box">
+            <div class="four-section-sub">
+              <p>1 / 4</p>
+              <div class="four-section-btn-box">
+                <button class="four-section-arrow-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.478 4.25 4 12l7.478 7.75.733-.709L5.91 12.51H20v-1.02H5.91l6.301-6.531z" clip-rule="evenodd"></path></svg>
+                </button>
+                <button class="four-section-arrow-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="four-section-image">
+              <div class="four-section-slides-box">
+                <div class="four-section-slide">
+                  <img src="./image/scroll-image-1.avif" alt="">
+                  <div class="four-section-slide-text">
+                    <h3>확장 가능한 디자인 시스템.</h3>
+                    <p>디자인과 코드가 잘 연계된 디자인 시스템으로 제품 개발 프로세스를 간소화하세요.</p>
+                    <a href="">
+                      <span class="btn-builtin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="btn-builtin-icon css-bni7vm"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                        <span>디자인 시스템 알아보기</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div class="four-section-slide">
+                  <img src="./image/scroll-image-2.avif" alt="">
+                  <div class="four-section-slide-text">
+                    <h3>빌드를 위해 디자인되었습니다.</h3>
+                    <p>Dev Mode는 Figma의 개발자 전용 공간으로 디자인을 코드로 변환하는 데 필요한 모든 것을 제공합니다.</p>
+                    <a href="">
+                      <span class="btn-builtin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="btn-builtin-icon css-bni7vm"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                        <span>Dev Mode 알아보기</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div class="four-section-slide">
+                  <img src="./image/scroll-image-3.avif" alt="">
+                  <div class="four-section-slide-text">
+                    <h3>세부 정보에 집중하는 Focus View 기능.</h3>
+                    <p>Dev Mode에서 특정 디자인을 선택하고 검사한 다음 Focus View에서 세부 정보를 자세히 살펴보면 무엇을 빌드해야 하는지 정확히 파악할 수 있습니다.</p>
+                  </div>
+                </div>
+                <div class="four-section-slide">
+                  <img src="./image/scroll-image-4.avif" alt="">
+                  <div class="four-section-slide-text">
+                    <h3>디자인 상태를 통한 진행 상황 추적.</h3>
+                    <p>Dev Mode에서 변경 및 완료 또는 빌드 준비가 된 사항에 대해 명확한 디자인 상태 업데이트 정보를 받아보세요.</p>
+                    <a href="">
+                      <span class="btn-builtin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" class="btn-builtin-icon css-bni7vm"><path fill="currentColor" fill-rule="evenodd" d="M12.522 4.25 20 12l-7.478 7.75-.733-.709 6.302-6.531H4v-1.02h14.09L11.79 4.959z" clip-rule="evenodd"></path></svg>
+                      </span>
+                    </a>
+                  </div>  
+                </div>
+                <div class="four-section-slide">
+                  <img src="./image/scroll-image-4.avif" alt="">
+                  <div class="four-section-slide-text">
+                    <h3>디자인 상태를 통한 진행 상황 추적.</h3>
+                    <p>Dev Mode에서 변경 및 완료 또는 빌드 준비가 된 사항에 대해 명확한 디자인 상태 업데이트 정보를 받아보세요.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fif-section">
+        <div class="fif-section-box">
+          <div class="fif-section-box-text">
+            <h2 class="fif-section-title">함께 만드는 더 나은 제품. Figma</h2>
+            <p class="fif-section-description">는 팀이 브레인스토밍하고 디자인하고 빌드하는 데 필요한 모든 것을 제공합니다.</p>
+          </div>
+          <div class="fif-section-video-box">
+            <img src="./image/figma-video.png" alt="" class="fif-section-video">
+          </div>
+          <div class="fif-section-sub-title-box">
+            <div class="fif-section-sub-title">
+              <h3>단일 진실 공급원(SSOT) 생성.</h3>
+              <p> 모두가 하나의 공유 파일에서 원활하게 협업하세요. 디자이너, 개발자, 카피라이터, 심지어 외부 파트너와 고객까지 함께 작업할 수 있습니다.</p>
+            </div>
+            <div class="fif-section-sub-title">
+              <h3>음성 대화, 채팅, 댓글을 통한 소통.</h3>
+              <p>파일 내에서 음성 대화 또는 채팅으로 소통하며 빠르게 작업하세요. 댓글로 피드백을 수집하고 최신 업데이트 사항을 추적하세요.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sec-section six-section">
+        <div class="sec-section-box">
+          <figure class="sec-section-box-inner">
+            <div class="sec-box-image six-section-box-image">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="56" fill="currentColor" viewBox="0 0 64 56" aria-hidden="true" ><g fill="currentColor"><path d="M29.866 0v24.286H14.79V26h.143c8.246 0 14.93 6.715 14.93 15 0 8.283-6.684 14.999-14.93 14.999C6.685 56 0 49.284 0 41q0-.215.006-.428H0V17.143C0 7.675 7.64 0 17.064 0zM64 0v24.286H48.923V26h.142c8.247 0 14.931 6.715 14.931 15 0 8.283-6.684 14.999-14.93 14.999-8.247 0-14.932-6.716-14.932-15q0-.215.006-.428h-.006V17.143C34.134 7.675 41.774 0 51.198 0z"></path></g></svg>
+              <blockquote>
+                <div><p class="sec-box-image-text">
+                  Figma는 우리 조직이 나아가야 할 방향을 제시하는 데 큰 도움이 됩니다.
+                  모두가 같은 곳을 바라보며 열정을 유지할 수 있죠.
+                </p></div>
+              </blockquote>
+            </div>
+            <figcaption>
+              <img src="./image/patagonia.svg" alt="patagonia logo" class="six-section-pata-logo">
+              <div class="figcaption-de-leader">
+                <div class="avatar-wrapper">
+                  <div class="avatar-border six-section-border"></div>
+                  <img class="leader-photo" src="./image/design-director.avif" alt="">
+                </div>
+                <div class="figcaption-text">
+                  <p>
+                    <p class="figcaption-text-name">Levon Sharrow</p>
+                    <p class="figcaption-text-title">익스피리언스 디자인 디렉터</p>
+                  </p>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="sev-section">
+        <div class="sev-section-box">
+          <h2 class="sev-section-text">Figma 사용 방법 알아보기</h2>
+          <div class="sev-section-subtitle">
+            <a href="https://help.figma.com/hc/ko/sections/4405269443991-Figma-for-Beginners-tutorial-4-parts-" target="_blank" rel="noreferrer">Figma Design: 초보자 튜토리얼</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true"><g clip-path="url(#a)"><path fill="currentColor" d="M0 20.8a3.2 3.2 0 0 0 6.4 0v-2.4h2.4v2.4a3.2 3.2 0 0 0 6.4 0v-2.4h2.4v2.4a3.2 3.2 0 1 0 3.2-3.2h-2.4v-2.4h2.4a3.2 3.2 0 0 0 0-6.4h-2.4V6.4h2.4a3.2 3.2 0 1 0-3.2-3.2v2.4h-2.4V3.2a3.2 3.2 0 0 0-6.4 0v2.4H6.4V3.2a3.2 3.2 0 1 0-3.2 3.2h2.4v2.4H3.2a3.2 3.2 0 0 0 0 6.4h2.4v2.4H3.2A3.2 3.2 0 0 0 0 20.8"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+            <a href="https://help.figma.com/hc/ko/sections/14548397990423-Introduction-to-design-systems-5-parts" target="_blank" rel="noreferrer">디자인 시스템 소개</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor" clip-path="url(#a)"><path d="M0 .4v10.8h17.6v.746A5.84 5.84 0 1 0 23.995 18H24V6.8A6.4 6.4 0 0 0 17.6.4z"></path><path d="M11.68 17.76a5.84 5.84 0 1 0-11.68 0 5.84 5.84 0 0 0 11.68 0"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"></path></clipPath></defs></svg>
+            <a href="https://help.figma.com/hc/ko/articles/1500004362321-Guide-to-FigJam" target="_blank" rel="noreferrer">FigJam 가이드</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true"><g clip-path="url(#a)"><path fill="currentColor" d="M17.89 16h4.51v8H1.6v-8h4.508A8 8 0 0 1 1.6 8.8V0h20.8v8.8a8 8 0 0 1-4.51 7.2"></path></g><defs><clipPath id="a"><path fill="#fff" d="M0 24h24V0H0z"></path></clipPath></defs></svg>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer-box">
+        <div class="box-1st">
+          <a href="">Figma</a>
+          <ul class="box-1st-ul">
+            <li>
+              <a href="" class="box-1st-ul-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true" class="css-jaq9k5"><path fill="currentColor" d="M9.47 6.77 15.3 0h-1.4L8.85 5.88 4.81 0H.15l6.11 8.9L.15 16h1.38l5.35-6.21L11.14 16h4.67zm-1.9 2.2-.61-.88-4.93-7.05h2.12l3.98 5.69.62.88 5.17 7.4h-2.13L7.58 8.97z"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a href="" class="box-1st-ul-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="none" viewBox="0 0 16 14" aria-hidden="true" class="css-jaq9k5"><g clip-path="url(#a)"><path fill="currentColor" d="M15.6 2.5c.4 1.4.4 4.4.4 4.4s0 3-.4 4.4c-.2.8-.8 1.4-1.5 1.6-1.4.4-6.1.4-6.1.4s-4.7 0-6-.4c-.8-.2-1.4-.8-1.6-1.6C0 9.9 0 6.9 0 6.9s0-3 .4-4.4c.2-.8.8-1.4 1.5-1.6C3.3.5 8 .5 8 .5s4.7 0 6 .4c.8.2 1.4.8 1.6 1.6M6.4 9.7l4.8-2.8-4.8-2.8z"></path></g><defs><clipPath id="a"><path fill="currentColor" d="M0 .5h16v13H0z"></path></clipPath></defs></svg>
+              </a>
+            </li>
+            <li>
+              <a href="" class="box-1st-ul-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 449 449" aria-hidden="true" class="css-jaq9k5"><path fill="currentColor" d="M224.18 109.6c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9-51.3-114.9-114.9-114.9m0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7m146.4-194.3c0 14.9-12 26.8-26.8 26.8a26.8 26.8 0 1 1 26.8-26.8m76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8m-47.8 224.5a75.63 75.63 0 0 1-42.6 42.6c-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9a75.63 75.63 0 0 1-42.6-42.6c-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1a75.63 75.63 0 0 1 42.6-42.6c29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9a75.63 75.63 0 0 1 42.6 42.6c11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a href="" class="1st-ul-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 449" aria-hidden="true" class="css-jaq9k5"><path fill="currentColor" d="M448 25.2v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V275h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8V70.8c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4V275h58.4v173.5H24.7C11.1 448.5 0 437.4 0 423.8V25.2C0 11.6 11.1.5 24.7.5h398.5C436.9.5 448 11.6 448 25.2"></path></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="foot-desc">
+          <div class="foot-desc-text">
+            <h2 class="foot-desc-title">제품</h2>
+            <ul class="foot-desc-ul">
+              <li>
+                <a href="">
+                  <span>Figma Design</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Dev Mode</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>FigJam</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Figma Slides</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Figma Draw</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Figma Buzz</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Figma Sites</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>Figma Make</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>AI</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>다운로드</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>릴리스 노트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="foot-desc-text">
+            <h2 class="foot-desc-title">요금제</h2>
+            <ul class="foot-desc-ul">
+              <li>
+                <a href="">
+                  <span>가격</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>엔터프라이즈</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>오거니제이션</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>프로페셔널</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-desc">
+          <div class="foot-desc-text">
+            <h2 class="foot-desc-title">활용 방법</h2>
+            <ul class="foot-desc-ul">
+              <li>
+                <a href="">
+                  <span>UI 디자인</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>UX 디자인</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>와이어프레임 만들기</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>다이어그램 만들기</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>프로토타입 만들기</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>브레인스토밍</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>온라인 화이트보드</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>애자일 워크플로우</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>전략 기획</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>마인드맵 만들기</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-desc">
+          <div class="foot-desc-text">
+            <h2 class="foot-desc-title">활용 방법</h2>
+            <ul class="foot-desc-ul">
+              <li>
+                <a href="">
+                  <span>블로그</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>모범 사례</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>QR 코드 생성기</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상환</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상 선택 도구</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상 팔레트</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상 팔레트 생성기</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>색상 대비 검사 도구</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>템플릿</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>개발자 리소스</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>기타 도구 연동</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>제휴 프로그램</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>리소스 라이브러리</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>보고서 및 인사이트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-desc">
+          <div class="foot-desc-text">
+            <h2 class="foot-desc-title">회사 소개</h2>
+            <ul class="foot-desc-ul">
+              <li>
+                <a href="">
+                  <span>이벤트</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>고객 스토리</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <span>채용정보</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
