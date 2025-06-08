@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red-box {
+      width: 100px;
+      height: 100px;
+      background-color: tomato;
+      /* transition: background-color 1s ease, width 4s ease; */
+      transition-property: background-color, width;
+      transition-duration: 1s, 3s;
+      transition-delay: .5s;
+      transition-timing-function: linear;
+    }
+
+    .red-box:hover {
+      width: 200px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <div class="red-box"></div>
+  
+</body>
+</html>

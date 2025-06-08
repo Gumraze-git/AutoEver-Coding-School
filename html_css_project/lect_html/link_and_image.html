@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 아래는 선택자임, img가 달려있는 모든 것들에 다음과 같은 스타일을 넣음 */
+    img {
+      width: 320px;
+      height: 320px;
+      padding: 10px;
+      background-color: gray;
+      border: 1px solid black;
+    }
+    
+    /* logo 클래스를 선언하여 img 태그에 오버라이드 하는 방식으로 스타일 설정 */
+    .logo {
+      width: 400px;
+      height: 100px;
+      border: 1px solid black;
+      background-color: white;
+    }
+
+  </style>
+</head>
+<body>
+  <p>
+    <!-- 리액트와 뷰의 경우는 페이지 이동이 없어 실질적으로 사용하지 않음 -->
+    <!-- 일반적으로 외부 이미지를 넣을 때 사용함. -->
+    <a href="http://google.co.kr" title="구글 페이지로 이동">구글 링크</a>
+
+    <!-- 아래는 새로운 페이지에서 링크가 열림 -->
+    <a href="http://google.co.kr" title="새 창에서 구글 페이지로 이동" target="_blank">새 창에서 구글 링크</a>
+
+    <!-- 다음과 같이 이미지도 넣어서 링크를 만들 수 있음 -->
+    <a href="http://google.co.kr" title="구글 페이지로 이동">
+        <img class="logo" src="./images/google_logo.png" alt="구글 로고">
+    </a>
+  </p>
+
+  <!-- 이미지 태그 넣기 -->
+  <img src="./images/bear.png" alt="bear 이미지가 없음">
+  <img src="./images/beach.jpg" alt="bear 이미지가 없음">
+</body>
+</html>

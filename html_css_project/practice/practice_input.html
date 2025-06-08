@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    fieldset {
+      width: 520px;
+      padding: 20px 40px;
+    }
+    .detail {
+      margin: 4px 40px;
+    }
+    
+  </style>
+</head>
+<body>
+  <fieldset>
+    <div>
+      <h1>프론트앤드 개발자 지원서</h1>
+      <p>HTML, CSS, Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</p>
+      <hr>
+    </div>
+    
+    <h3>개인 정보</h3>
+    <div class="detail">
+      <label>이름<input type="text" value="공백없이 입력하세요."></label>
+    </div>
+    <div class="detail">
+      <label>연락처<input type="tel"></label>
+    </div>
+
+    <h3>지원 분야</h3>
+    <div class="detail">
+      <label>웹퍼블리싱<input type="radio" name="gender" value="male"></label><br>
+      <label>웹 프론트앤드<input type="radio" name="gender" value="male"></label><br>
+      <label>모바일 앱<input type="radio" name="gender" value="male"></label><br>
+    </div>
+
+    <h3>지원동기</h3>
+    <div>
+      <textarea name="desc" rows="5" cols="70"></textarea><br>
+      <button type="submit">접수하기</button>
+      <button type="submit">다시쓰기</button>
+    </div>
+  </fieldset>
+</body>
+</html>

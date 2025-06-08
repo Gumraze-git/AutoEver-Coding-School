@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      /* 하나의 선으로 닫히는 코드 */
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid grey;
+      text-align: center;
+      padding: 10px;
+    }
+
+    th {
+      background-color: lightblue;
+    }
+    
+    .first {
+      background-color: orange;
+    }
+
+  </style>
+</head>
+<body>
+  <table>
+    <caption>표 제목</caption>
+    <!-- table row: tr, 행이 됨 -->
+    <!-- 테이블 로우 하나가 array, list에 담기는 객체 하나 -->
+    <tr>
+      <!-- table head: th, 열이 됨 -->
+      <th>번호</th>
+      <th>상품</th>
+      <th>수량</th>
+      <th>가격</th>
+    </tr>
+    <!-- 다음 코드는 하드코딩이지만 추후, 순회 등의 로직으로 처리함 -->
+    <tr>
+      <td>1</td>
+      <td>콜라</td>
+      <td>1개</td>
+      <td>1,500원</td>
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <td>사이다</td>
+      <td>2</td>
+      <td>2,000원</td>
+    </tr>
+
+    <tr>
+      <td>3</td>
+      <td>샌드위치</td>
+      <td>1</td>
+      <td>5,000원</td>
+    </tr>
+
+    <tr>
+      <td>4</td>
+      <td>탄산수</td>
+      <td>4개</td>
+      <td>4,000원</td>
+    </tr>
+    
+  </table>
+  <hr />
+  <h1>rowspan과 colspan 활용</h1>
+  
+  <table>
+    <caption>
+      <b>
+        표 만들기
+      </b>
+    </caption>
+
+    <!-- 아래 부분은 스크린 리더로 읽으면 제목이라고 알려준다. -->
+    <thead>
+      <tr>
+        <!-- table head: th -->
+        <th class="first">번호</th>
+        <th class="first">상품명</th>
+        <th class="first">수량</th>
+        <th class="first">가격</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>1</td>
+        <td>콜라</td>
+        <td>1개</td>
+        <td>1,500원</td>
+      </tr>
+  
+      <tr>
+        <td>2</td>
+        <td>사이다</td>
+        <td>2개</td>
+        <td rowspan="2">1,000원</td>
+      </tr>
+  
+      <tr>
+        <td>3</td>
+        <td>탄산수</td>
+        <td>3개</td>
+        <!-- 위의 행에서 만들어졌으므로 필요 없음 -->
+      </tr>
+      
+    </tbody>
+    
+    <tfoot>
+      <tr>
+        <td>총 금액</td>
+        <td colspan="3" style="text-align: right;">6,500원</td>
+      </tr>
+    </tfoot>
+
+  </table>
+
+
+  
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>DOM 추가/삭제</h1>
+  <p>공부할 과목을 기록해보세요</p>
+  <p>공부가 끝난 과목은 클릭해서 삭제 할 수 있습니다.</p>
+
+  <input type="text" id="subject">
+  <button onclick="newResister()">추가</button>
+  <hr/>
+
+  <ul id="itemList"></ul>
+
+  <script>
+    /* JS 흐름
+    1. 버튼 클릭
+    2. newResister() 함수 실행
+    3. subject의 값(value) 읽음
+    4. <li> 요소 생성
+    5. <li> 요소의 값을 subject의 값으로 설정
+    6. itemList의 가장 위(childNodes[0])에 새로운 <li> 삽입
+    7. input창 초기화
+    8. <li> 항목을 더블 클릭하면 값 삭제됨 */
+    function newResister() {
+      const subject = document.querySelector("#subject")
+
+      const newItem = document.createElement("li")
+      newItem.innerText = subject.value;
+      subject.value = "";
+
+      const itemList = document.querySelector("#itemList")
+      itemList.insertBefore(newItem, itemList.childNodes[0])
+
+      // 왜 함수 안에다가 이렇게 넣었는가?
+      // 더블 클릭이 발생하면, () -> 익명의 함수가 실행된다 라고 작성되어 있음
+      newItem.addEventListener("dblclick", () => {
+        itemList.removeChild(newItem)
+      })
+      
+    }
+  </script>
+
+</body>
+</html>

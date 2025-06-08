@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      color: gray;
+    }
+    div {
+      color: darkblue;
+    }
+    p {
+      color: tomato;
+    }
+
+    /* 단위 */
+    .parent {
+      font-size: 40px;
+    }
+
+    .child p{
+      color: black;
+      font-size: 1.5em;
+    }
+
+    .child-child {
+      font-size: 40%;
+    }
+
+    /* vw(view width), vh(view height) */
+    .vw {
+      font-size: 2vw; /* 가로 너비의 2%를 의미 */
+    }
+
+    .vh {
+      font-size: 2vh; /* 가로 너비의 2%를 의미 */
+    }
+
+    /* RGB,RGBa HEX */
+    h1 {
+      color: rgb(255, 0, 0);
+    }
+
+    h2 {
+      color: rgba(255, 0, 0, .3);
+    }
+
+    h3 {
+      color: #0f0;
+    }
+
+    .color {
+      width: 300px;
+      height: 300px;
+      background-color: rgba(27, 137, 181, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <p>안녕하세요</p>
+    <p>오늘은 수업 2일차 입니다</p>
+    <div class="child">
+      <p>저는 자식 입니다.</p>
+      <div class="child-child">
+        <p>저는 자식의 자식입니다.</p>
+      </div>
+    </div>
+  </div>
+  <p class="vw">집에 갈 시간이 얼마 안남았어요</p>
+  <p class="vh">집에 갈 시간이 얼마 안남았어요</p>
+  <h1>색상1</h1>
+  <h2>색상2</h2>
+  <h3>색상3</h3>
+
+  <div class="color"></div>
+
+</body>
+</html>

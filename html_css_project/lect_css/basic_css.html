@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 외부 스타일링: 링크를 통해 외부에 있는 스타일링 설정을 가져옴. -->
+  <link rel="stylesheet" href="./css/test.css">
+  <!-- 내부 스타일링 -->
+  <style>
+    /* 선택자 */
+    div {
+      /* 속성과 속성값 */
+      width: 200px;
+      height: 200px;
+      background-color: cadetblue;
+      color: white;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>1번</div>
+  <!-- 인라인 스타일링의 우선 순위가 가장 높음 -->
+  <div style="background-color: orange;">2번</div>
+
+  <p>안녕하세요</p>
+</body>
+</html>

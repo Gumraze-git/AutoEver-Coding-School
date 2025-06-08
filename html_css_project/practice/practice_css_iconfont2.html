@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+
+    * {
+      font-family: "roboto";
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }    
+
+    body {
+      background-color: ghostwhite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    button, div {
+      color: #504444;
+    }
+    .container {
+      width: 304px;
+      height: 390px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      padding: 28px 30px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+      display: flex;
+      flex-direction: column;
+      
+      align-items: center;
+    }
+
+    .container > div {
+      box-sizing: border-box;
+      margin-bottom: 16px;
+    }
+
+    button {
+      width: 228px;
+      height: 44px;
+      margin-bottom: 16px;
+      background-color: white;
+      border: 1px solid gray;
+      box-sizing: border-box;
+    }
+
+    input {
+      width: 228px;
+      height: 44px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    .or {
+      font-size: 16px;
+      
+    }
+
+    .login {
+      width: 220px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #373f37;
+      color: #ffffff;
+    }
+
+    .password {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid;
+      margin-top: 16px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button><i class="fa-brands fa-google"></i> Log in with Google</button>
+    <div class = "or">or</div>
+    <input type="text" placeholder="Username">
+    <input type="text" placeholder="Password">
+    <div class="login">LOGIN</div>
+    <div class="password">Forget your password</div>
+  </div>
+
+</body>
+</html>

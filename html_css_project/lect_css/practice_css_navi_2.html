@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My News Site</title>
+
+  <!-- Google Font: Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      background-color: #fafafa;
+      color: #333;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header, main, footer {
+      width: 100%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+    }
+
+    /* Header */
+    .site-header {
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to right, #ffffff, #f5f5f5);
+      border-bottom: 1px solid #ddd;
+      padding: 0 8px;
+      z-index: 10;
+    }
+
+    .logo-box,
+    .menu-toggle {
+      width: 48px;
+      height: 48px;
+      background-color: #333;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .menu-toggle:hover {
+      background-color: #2e7d32;
+      transform: rotate(90deg);
+    }
+
+    /* Navigation */
+    .nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      height: 100%;
+    }
+
+    .nav-item {
+      padding: 8px 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-item:hover {
+      background-color: #2e7d32;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 128, 0, 0.2);
+    }
+
+    /* Main */
+    .main {
+      flex-grow: 1;
+      padding: 24px 0;
+    }
+
+    /* Footer */
+    .footer {
+      height: 60px;
+      background: linear-gradient(to right, #2e7d32, #388e3c);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="container site-header">
+    <div class="logo-box"><i class="fa-solid fa-newspaper"></i></div>
+    <nav class="nav">
+      <div class="nav-item">정치</div>
+      <div class="nav-item">경제</div>
+      <div class="nav-item">사회</div>
+      <div class="nav-item">문화</div>
+    </nav>
+    <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
+  </header>
+
+  <main class="container main">
+    <!-- 콘텐츠 영역 -->
+    <p>여기에 주요 기사, 이미지, 콘텐츠를 삽입할 수 있습니다.</p>
+  </main>
+
+  <footer class="footer">
+    © 2025 My News Site
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      display: flex;
+      width: 320px;
+      height: 120px;
+      background-image:url('./images/coffee.jpg');
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: orangered;
+      font-weight: bolder;
+      border: 3px solid black;
+      margin-bottom: 5px;
+    }
+
+    .noRepeat {
+      background-repeat: no-repeat;
+    }
+
+    .size {
+      width: 80px;
+      height: 60px;
+      background-size: 80px 60px;
+      font-size: 10px;
+      background-size: contain;
+    }
+
+    .pos {
+      width: 320px;
+      height: 240px;
+      background-repeat: no-repeat;
+      background-position: 0px 50px;
+    }
+
+    .parent{
+      height: 240px;
+      overflow: scroll;
+    }
+
+    .child {
+      height: 400px;
+      background-attachment: scroll;
+    }
+
+    .gradient {
+      background: linear-gradient(to right bottom, blue, white);
+    }
+
+    .gradi-angle {
+      background: linear-gradient(45deg, blue, white);
+    }
+
+    .gradi-color-stop-point {
+      background: linear-gradient(to bottom, #06f, white 30%, #06f);
+    }
+
+    .radical-gradient {
+      background-image: radial-gradient(circle, blue, skyblue);
+    }
+
+    
+  </style>
+</head>
+<body>
+  <div>320px, 120px의 이미지 입니다.</div>
+  <div class="noRepeat">이미지가 반복되지 않습니다.</div>
+  <div class="size">이미지가 손상되지 않습니다.</div>
+  <div class="pos">절대 위치를 지정합니다.</div>
+  <div class="parent">
+    <div class="child">스크롤</div>
+  </div>
+
+  <hr>
+  <h2>그라데이션 실습</h2>
+  <hr>
+  <h3>선형 그라데이션</h3>
+  <div class="gradient"></div>
+  <div class="gradi-angle"></div>
+  <div class="gradi-color-stop-point"></div>
+  <hr>
+  <h3>방사형 그라데이션</h3>
+  <div class="radical-gradient"></div>
+  
+</body>
+</html>

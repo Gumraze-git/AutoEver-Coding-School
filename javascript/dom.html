@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 id="title">문서 제목입니다.</h1>
+  <p class="text">첫 번째 단락입니다.</p>
+  <p class="text">두 번째 단락입니다.</p>
+  <p>세 번째 단락입니다.</p>
+  <script>
+    // 문서의 최상위 노드
+    let doc = document.firstChild;
+    console.log(doc); /* <!DOCUMENT html>이 콘솔에서 출력됨. */
+
+    // 실제 HTML 루트 요소
+    let html = document.firstElementChild;
+    console.log(html) /* html 요소들이 콘솔에서 출력됨. */
+
+    // 요소를 선택할 수 있는 방법은 3가지가 있다. 1. id, 2. class name, 3.tag name
+    // id로 선택하기
+    let el = document.getElementById("title");
+    console.log(el)
+    console.log(el.innerText)
+
+    // class name으로 선택하기
+    // 클래스는 복수의 요소를 가지고 있기 때문에 아래 객체는 "유사 배열"의 형태로 출력된다.
+    let classEls = document.getElementsByClassName("text")
+    console.log(classEls)
+
+    // 배열로 변환하여 forEach도 사용가능하다.
+    console.log("forEach 사용 예시")
+    Array.from(classEls).forEach(element => {
+      console.log(element)
+    });
+
+    // 일반 for루프도 사용 가능하다.
+    console.log("일반적인 for 루프 사용 예시")
+    for (ele of classEls) {
+      console.log(ele)
+    }
+
+    // 태그 명으로 선택하기
+    console.log("태그 명 선택자 사용 예시")
+    let tagEls = document.getElementsByTagName("p")
+    console.log(tagEls)
+
+    // 쿼리 선택자
+    console.log("쿼리 선택자 사용 예시")
+    console.log("쿼리 id 선택 시")
+    const queryEl = document.querySelector("#title"); // id 선택자를 선택할 때는 `#`을 사용.
+    console.log(queryEl)
+
+    console.log("쿼리 tag 선택 시")
+    const queryEls = document.querySelectorAll("p") // tag을 선택할 때는 전위에 아무것도 붙이지 않음.
+    console.log(queryEls)
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프론트엔드 개발자 지원서</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: ghostwhite;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    fieldset {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px 40px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .radio-group label {
+      display: inline-block;
+      margin-right: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .button-group {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-right: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button[type="reset"] {
+      background-color: #f44336;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <div>
+        <h1>프론트엔드 개발자 지원서</h1>
+        <p>HTML, CSS, JavaScript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</p>
+        <hr>
+      </div>
+
+      <h3>개인 정보</h3>
+      <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="공백없이 입력하세요.">
+      </div>
+      <div class="form-group">
+        <label for="phone">연락처</label>
+        <input type="tel" id="phone" placeholder="전화번호 입력">
+      </div>
+
+      <h3>지원 분야</h3>
+      <div class="form-group radio-group">
+        <label><input type="radio" name="position" value="publishing"> 웹 퍼블리싱</label>
+        <label><input type="radio" name="position" value="frontend"> 웹 프론트엔드</label>
+        <label><input type="radio" name="position" value="mobile"> 모바일 앱</label>
+      </div>
+
+      <h3>지원 동기</h3>
+      <div class="form-group">
+        <textarea name="desc" rows="5" placeholder="지원 동기를 입력하세요."></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit">접수하기</button>
+        <button type="reset">다시쓰기</button>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>

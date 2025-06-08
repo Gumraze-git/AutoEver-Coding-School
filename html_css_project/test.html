@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: lightgrey;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .label {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 400px;
+      height: 300px;
+      background-color: whitesmoke;
+      border: 1px solid grey;
+      border-radius: 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 2px;
+      flex-flow: row wrap;
+    }
+
+    .item {
+      width: 100px;
+      background-color: antiquewhite;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1px;
+      flex-direction: column;
+    }
+
+    .item:nth-child(2n) {
+      background-color: lightcoral;
+    }
+
+    .itemart {
+      justify-content: flex-start;
+    }
+
+    .center {
+      justify-content: center;
+    }
+
+    .nowrap {
+      flex-wrap: nowrap;
+    }
+
+    .end {
+      justify-content: flex-end;
+    }
+
+    .space-between {
+      justify-content: space-between;
+    }    
+
+    .ali-st {
+      align-items: stretch;
+      
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container-wrapper">
+    <h3 class="label">flex wrap: nowrap</h3>
+    <div class="container nowrap">
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+      <div class="item">item</div>
+    </div>
+  </div>
+
+  <div class="container-wrapper">
+    <h3 class="label">flex start</h3>
+    <div class="container flex-start">
+      <div class="item">item1</div>
+      <div class="item">item2</div>
+      <div class="item">item3</div>
+      <div class="item">item4</div>
+      <div class="item">item5</div>
+      <div class="item">item6</div>
+      <div class="item">item7</div>
+      <div class="item">item8</div>
+      <div class="item">item9</div>
+    </div>
+  </div>
+
+  <div class="container-wrapper flex-center">
+    <h3 class="label">center</h3>
+    <div class="container center">
+      <div class="item">item1</div>
+      <div class="item">item2</div>
+      <div class="item">item3</div>
+      <div class="item">item4</div>
+      <div class="item">item5</div>
+      <div class="item">item6</div>
+      <div class="item">item7</div>
+      <div class="item">item8</div>
+      <div class="item">item9</div>
+    </div>
+  </div>
+
+  <div class="container-wrapper flex-center">
+    <h3 class="label">flex end</h3>
+    <div class="container end">
+      <div class="item">item1</div>
+      <div class="item">item2</div>
+      <div class="item">item3</div>
+      <div class="item">item4</div>
+      <div class="item">item5</div>
+      <div class="item">item6</div>
+      <div class="item">item7</div>
+      <div class="item">item8</div>
+      <div class="item">item9</div>
+    </div>
+  </div>
+
+  <div class="container-wrapper flex-center">
+    <h3 class="label">space between</h3>
+    <div class="container space-between">
+      <div class="item">item1</div>
+      <div class="item">item2</div>
+      <div class="item">item3</div>
+      <div class="item">item4</div>
+      <div class="item">item5</div>
+      <div class="item">item6</div>
+      <div class="item">item7</div>
+      <div class="item">item8</div>
+      <div class="item">item9</div>
+    </div>
+  </div>
+
+  <div class="container-wrapper flex-center">
+    <h3 class="label">align: stretch</h3>
+    <div class="container ali-st">
+      <div class="item">item1</div>
+      <div class="item">item2</div>
+      <div class="item">item3</div>
+    </div>
+  </div>
+</body>
+</html>

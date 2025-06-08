@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .color-box {
+      display: flex;
+      gap: 50px;
+    }
+
+    .color-box > button {
+      width: 200px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #green {
+      background-color: green;
+    }
+
+    #orange {
+      background-color: orange;
+    }
+
+    #purple {
+      background-color: purple;
+    }
+
+    #colorBox {
+      width: 700px;
+      height: 500px;
+      background-color: aliceblue;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="color-box">
+    <button id="green" onclick="changeColor('green')">Green</button>
+    <button id="orange" onclick="changeColor('orange')">Orange</button>
+    <button id="purple" onclick="changeColor('purple')">Purple</button>
+  </div>
+
+  <div id="colorBox"></div>
+
+  <script>
+    // 함수를 사용하여 단순화
+    function changeColor(color) {
+      const colorEvent = document.querySelector("#colorBox")
+
+      colorEvent.style.backgroundColor = color;
+      colorEvent.style.display = "flex"
+      colorEvent.style.alignItems = "center"
+      colorEvent.style.justifyContent = "center"
+      colorEvent.style.fontSize = "50px"
+      colorEvent.innerText = color;
+      colorEvent.style.color = "white"
+      
+    }
+    /* 
+    const greenEvent = document.querySelector("#green")
+    const orangeEvent = document.querySelector("#orange")
+    const purpleEvent = document.querySelector("#purple")
+
+    const colorBox = document.querySelector("#colorBox")
+
+    greenEvent.addEventListener("click", () => {
+      colorBox.style.background = "green"
+      colorBox.innerText = "GREEN"
+      colorBox.style.display = "flex"
+      colorBox.style.justifyContent = "center"
+      colorBox.style.alignItems = "center"
+      colorBox.style.color = "white"
+      colorBox.style.fontSize = "50px"
+    })
+    orangeEvent.addEventListener("click", () => {
+      colorBox.style.background = "orange"
+      colorBox.innerText = "ORANGE"
+      colorBox.style.display = "flex"
+      colorBox.style.justifyContent = "center"
+      colorBox.style.alignItems = "center"
+      colorBox.style.color = "black"
+      colorBox.style.fontSize = "50px"
+    })
+    purpleEvent.addEventListener("click", () => {
+      colorBox.style.background = "purple"
+      colorBox.innerText = "PURPLE"
+      colorBox.style.display = "flex"
+      colorBox.style.justifyContent = "center"
+      colorBox.style.alignItems = "center"
+      colorBox.style.color = "white"
+      colorBox.style.fontSize = "50px"
+    }) */
+  </script>
+</body>
+</html>

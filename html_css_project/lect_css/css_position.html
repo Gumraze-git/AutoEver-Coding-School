@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+    }
+
+    .container {
+      position: relative;
+      width: 300px;
+      background-color: antiquewhite;
+    }
+
+    .red-box {
+      position: sticky;
+      top: 40px;
+      background-color: red;
+    }
+
+    .green-box {
+      /* 원래 위치에서 상대적으로(relative) 왼쪽(left)로 100px 만큼 이동 */
+      position: relative;
+      left: 100px;
+      /* 즉, 최종 위치에서 left 100px 만큼 움직이면 원래 위치로 돌아옴. */
+
+      background-color: green;
+    }
+
+    .blue-box {
+      position: absolute; /* 부모의 절대적인 위치를 기준으로 */
+      left: 10px;
+      top: 10px;
+      background-color: blue;
+    }
+
+    .brown-box {
+      position: fixed; /* 항상 뷰포트(view port, 화면) 기준으로 고정되는 옵션 */
+      left: 100px;
+      top: 100px;
+      background-color: darkred;
+      z-index: 2; /* 인덱스가 클수록 상단 레이어에 올라옴. */
+    }
+
+    .last-box {
+      position: absolute;
+      left: 80px;
+      top: 80px;
+      background-color: steelblue;
+      z-index: 1; /* position이 static인 경우에는 z-index가 작동하지 않음. */
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box red-box"></div>
+    <div class="box green-box"></div>
+    <div class="box blue-box"></div>
+    <div class="box brown-box"></div>
+    <div class="box last-box"></div>
+
+  </div>
+</body>
+</html>

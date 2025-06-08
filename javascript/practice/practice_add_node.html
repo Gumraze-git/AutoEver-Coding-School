@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>오늘의 점심 메뉴</h1>
+  <div id="menu">
+
+  </div>
+  
+  <script>
+    // div 태그를 생성하고 하위의 메뉴 리스트를 추가하기
+    // ul, li tag을 이용하여 만들기
+
+    // 1. 메뉴 div 박스 쿼리로 선택
+    const meunEl = document.querySelector("#menu")
+
+    // 2. 노드(태그) 생성
+    const menuList = document.createElement("ul")
+
+    const menuItem1 = document.createElement("li")
+    const menuItem2 = document.createElement("li")
+    const menuItem3 = document.createElement("li")
+    const menuItem4 = document.createElement("li")
+
+    // 3. 컨텐츠 생성
+    menuItem1.innerText = "돈까스"
+    menuItem2.innerText = "서브웨이"
+    menuItem3.innerText = "맥도날드"
+    menuItem4.innerText = "짬뽕"
+
+    // 4. 컨텐츠를 노드에 append
+    menuList.appendChild(menuItem1)
+    menuList.appendChild(menuItem2)
+    menuList.appendChild(menuItem3)
+    menuList.appendChild(menuItem4)
+
+    // 5. 최상위 노드를 최상위 div에 붙임.
+    meunEl.appendChild(menuList)
+
+    // JS에서는 Real-DOM을 사용 가능하기 때문에, React, Vue에서는 사용하지 않는다.
+    // React는 가상 DOM을 사용하고, Vue에서는 템플릿 기반 DOM을 바인딩 하기 때문에
+    // 일반적으로 React, Vue 환경에서 JS를 사용하기 때문에 DOM 문법을 사용하지 않는다.
+
+
+  </script>
+  
+</body>
+</html>

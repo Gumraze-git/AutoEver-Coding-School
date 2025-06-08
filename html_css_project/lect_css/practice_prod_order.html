@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+     text-align: center; 
+     margin-bottom: 20px;
+     width: 1000px;
+    }
+
+    .container {
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product {
+      display: flex;
+      gap: 5px;
+      box-sizing: border-box;
+    }
+
+    .overlay {
+      width: 300px;
+      height: 200px;
+      background-color: rgba(0,0,0,0.2);
+      opacity: 0;
+      position: absolute;
+      top: 61px;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      transition: all .3s ease;
+    }
+
+    .item:hover .overlay{
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>신상품 목록</h3>
+    <div class="product">
+      <div class="item">
+        <img src="../images/prod1.jpg">
+        <div class="overlay">
+          <h3>상품</h3>
+          <p>상품에 대한 설명</p>
+          <p>가격: 100,000₩</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="../images/prod2.jpg">
+        <div class="overlay">
+          <h3>상품</h3>
+          <p>상품에 대한 설명</p>
+          <p>가격: 100,000₩</p>
+        </div>
+      </div>
+      <div class="item">
+        <img src="../images/prod3.jpg">
+        <div class="overlay">
+          <h3>상품</h3>
+          <p>상품에 대한 설명</p>
+          <p>가격: 100,000₩</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
