@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma 가입하기</title>
+  <link rel="stylesheet" href="./admission.css">
+  <link rel="icon" type="image/png" sizes="192x192"  href="image/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="./admission.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="./image/Figma Icon (Full-color).svg" alt="figma logo">
+  </header>
+  <main>
+    <div class="container">
+      <h1>Figma에 오신 것을 환영합니다.</h1>
+      <div class="input-box">
+        <div class="input-inner">
+          <input type="text" id="email" placeholder="EMAIL" >
+          <span>사용 불가 합니다.</span>
+        </div>
+        <div class="input-inner">
+          <input type="password" id="password" placeholder="PASSWORD">
+          <span>사용 불가 합니다.</span>
+        </div>
+        <div class="input-inner">
+          <input type="text" id="phone" placeholder="000-0000-0000">
+          <span>사용 불가 합니다.</span>
+        </div>
+        <button class="admission" id="admit" disabled>ADMIT</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Manage cookies or opt out</p>
+  </footer>
+</body>
+</html>
