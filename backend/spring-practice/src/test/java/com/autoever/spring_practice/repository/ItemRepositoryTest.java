@@ -40,6 +40,7 @@ class ItemRepositoryTest {
             item.setStockNumber(100);
             item.setRegDate(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());
+            // save가 새로운 아이템 추가인 insert와 update를 수행해준다.
             Item savedItem = itemRepository.save(item);
             log.debug("Item saved : {}", savedItem);
         }
@@ -54,4 +55,16 @@ class ItemRepositoryTest {
             log.debug("Item found : {}", item);
         }
     }
+
+    @Test
+    @DisplayName("상품명 또는 상품 상세 설명")
+    public void findByItemNameOrItemDescription() {
+        this.createItemList();
+        List<Item> list = itemRepository
+                .findByItemNameOrItemDescription("테스트 상품 1", "test description");
+        for (Item item : list) {
+            log.info("Item found : {}", item);
+        }
+    }
+
 }
