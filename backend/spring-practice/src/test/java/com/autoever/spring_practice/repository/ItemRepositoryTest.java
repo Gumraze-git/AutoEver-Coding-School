@@ -67,4 +67,14 @@ class ItemRepositoryTest {
         }
     }
 
+    @Test
+    @DisplayName("@Query를 이용한 상품 조회 테스트")
+    public void findByItemDescription() {
+        this.createItemList();
+        List<Item> list = itemRepository.findByItemDescription("test description");
+        for (Item item : list) {
+            log.info("Item found : {}", item);
+        }
+    }
+
 }
