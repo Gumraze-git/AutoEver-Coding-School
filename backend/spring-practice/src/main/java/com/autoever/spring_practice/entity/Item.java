@@ -28,7 +28,7 @@ public class Item {
     private String itemName;
 
     @Column(nullable = false)
-    private int Price;
+    private int price;
 
     @Column(nullable = false)
     private int stockNumber; // 재고 수량, DB에서는 자동으로 snake 표기법으로 자동 변경된다.
