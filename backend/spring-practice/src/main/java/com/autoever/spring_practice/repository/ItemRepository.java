@@ -26,7 +26,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     // @Query: JPQL, nativeQuery
     // JPQL: OOP 언어로 쿼리를 작성하는 언어이다.
     @Query("SELECT i FROM Item i WHERE i.itemDescription like %:itemDescription% ORDER BY i.price desc")
-    List<Item> findByItemDescription(@Param("ItemDescription") String itemDescription);
+    List<Item> findByItemDescription(@Param("itemDescription") String itemDescription);
 
     // Native Query: 해당하는 DB의 실제 쿼리를 작성, 복잡한 쿼리를 작성 가능하다.
     @Query(value = "SELECT * FROM item i WHERE i.item_description " +
