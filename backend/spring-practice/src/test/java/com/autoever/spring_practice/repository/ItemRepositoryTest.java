@@ -77,4 +77,14 @@ class ItemRepositoryTest {
         }
     }
 
+    @Test
+    @DisplayName("Native Query 테스트")
+    public void findByItemDescriptionByNativeQuery() {
+        this.createItemList();
+        List<Item> list = itemRepository.findByItemDescriptionByNativeQuery("test description");
+        for (Item item : list) {
+            log.info("Item found : {}", item);
+        }
+    }
+
 }
