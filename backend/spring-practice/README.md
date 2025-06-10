@@ -137,14 +137,6 @@ public class SpringPracticeApplication {
 ```java
 package com.autoever.spring_practice.entity;
 
-import com.autoever.spring_practice.constant.ItemsSellStatus;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
 @Getter @Setter // Lombok이 getter와 setter 메서드를 자동을 생성해주는 애너테이션이다.
 @ToString // ToString: toString() 메서드를 자동으로 생성하여 객체를 로깅할 때 각 필드의 값을 보기 쉽게 출력한다.
 @Entity // 현재 클래스가 JPA에서 관리되는 엔티티 클래스임을 선언하는 애너테이션이다.
@@ -228,13 +220,6 @@ public class Item {
 ```java
 package com.autoever.spring_practice.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
 @Entity // Member 클래스가 JPA 엔티티임을 나타낸다.
 @Table(name = "member") // Member 엔티티가 매핑될 테이블의 이름을 지정한다.
 @Getter @Setter // Lombok이 제공하는 자동 getter, setter 메서드 생성 애너테이션
@@ -279,18 +264,13 @@ public class Member {
     - JPA가 해당 객체를 persist(처음으로 데이터베이스에 저장하기 직전) 되기 전 등록일 필드에 현재 시간 자동 할당함.
     - 즉, `memberRepository.save(member);` 호출 시, persist가 발생한다.
 
+- - -
 #### Cart
 - 회원(Member)이 보유한 장바구니(Cart) 정보를 저장하고 관리하는 도메인 객체이다.
 - 회원과 1:1 관계를 가지며 장바구니 식별자, 이름, 소유자를 포함하는 구조를 가지고 있다.
-- 
+
 ```java
 package com.autoever.spring_practice.entity;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -325,6 +305,7 @@ public class Cart {
   ```
   - 각 회원은 하나의 장바구니를 가질 수 있으며, 장바구니는 하나의 회원에 귀속되어야함.
 
+- - -
 #### CartItem
 - `CartItem`은 장바구니(`Cart`)에 담긴 개별 상품(`Item`)의 정보를 표현하는 연결 엔티티이다.
 - 장바구니와 상품 간의 N:M(ManyToMany) 관계를 중간 테이블 형태로 모델링 한다.
@@ -334,12 +315,6 @@ public class Cart {
   
 ```java
 package com.autoever.spring_practice.entity;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -380,6 +355,7 @@ public class CartItem {
   - 하나의 `CartItem`은 오직 하나의 `Cart`, `Item`에만 속함.
   - 다대다(N:M) 관계를 표현하는 중간 테이블 엔티티 설계의 형태임.
 
+- - -
 #### Order
 - 고객 상품의 주문 정보를 표현하는 클래스이다.
 - 하나의 주문에 여러 주문 항목(`OrderItem`)이 포함되는 주문 도메인 루트 엔티티이다.
@@ -389,16 +365,6 @@ public class CartItem {
   - 하나의 주문은 여러 개의 주문 항목으로 구성되므로 일대다 관계로 설정
 ```java
 package com.autoever.spring_practice.entity;
-
-import java.util.List;
-import com.autoever.spring_practice.constant.OrderStatus;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -447,6 +413,7 @@ public class Order {
   - 하나의 회원은 여러 주문을 생성할 수 있음.
   - 하나의 주문은 여러 개의 주문 항목을 포함할 수 있음.
 
+- - -
 #### OrderItem
 - `OrderItem`은 하나의 주문에 포함된 개별 상품의 상세 내역을 나타내는 엔티티로 어떤 상품이 몇 개, 얼마에 주문되었는지 표현한다.
 - `Order`와 `Item` 사이의 다대다(N:M) 관계를 해소하기 위한 중간 테이블의 역할을 수행한다.
@@ -457,13 +424,6 @@ public class Order {
 
 ```java
 package com.autoever.spring_practice.entity;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -528,13 +488,6 @@ public class OrderItem {
 
 ```java
 package com.autoever.spring_practice.repository;
-
-import java.util.List;
-import com.autoever.spring_practice.entity.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 @Repository // Spring이 해당 인터페이스를 Repository Bean으로 인식하게 하는 애너테이션
 
