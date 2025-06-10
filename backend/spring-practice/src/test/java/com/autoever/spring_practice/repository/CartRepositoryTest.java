@@ -39,7 +39,7 @@ class CartRepositoryTest {
     }
 
     @Test
-    @Transactional
+    @Transactional // 여러개의 작업을 하나의 논리적인 작업 단위로 묶어준다. 테스트 성공 및 실패와 관계없이 자동으로 롤백한다.
     @DisplayName("장바구니와 회원 매핑 조회 테스트")
     public void findCartAndMember() {
         Member member = createMember();
