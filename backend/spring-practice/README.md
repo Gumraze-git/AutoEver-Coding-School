@@ -1,5 +1,5 @@
 # Spring Boot Practice
-- Spring Boot 백엔드 학습 프로젝트
+- Spring Boot 백엔드 학습 내용 정리
 
 ## 프로젝트 구조
 ```text
