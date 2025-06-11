@@ -62,28 +62,27 @@ src
 
 > 이외에는 헥사고날 아키텍처, 클린 아키텍처, 모놀리식 구조, 마이크로서비스 아키텍처 등이 있다.
 
-### 코드의 계층형 아키텍처
-1. 프레젠테이션 계층
-  ```text
-  controller  
-  ├── AuthController
-  └── RestApiTestController
-  ```
-2. 애플리케이션 계층
-  - 현재 애플리케이션 계층의 코드는 없음. 
-3. 도메인 계층
-  ```text
-  entity  
-  ├── Item
-  └── Member
-  constant
-  └── ItemSellStatue
-  ```
-4. 인프라/ 영속성 계층
-  ```text
-  repository  
-  └── ItemRepository
-  ```
+### 현재 프로젝트의 계층형 아키텍처
+```
+1. 프레젠테이션 계층 (Presentation Layer)
+└── controller
+    ├── AuthController
+    └── RestApiTestController
+
+2. 애플리케이션 계층 (Application Layer)
+└── (현재 없음)
+
+3. 도메인 계층 (Domain Layer)
+├── entity
+│   ├── Item
+│   └── Member
+└── constant
+    └── ItemSellStatus
+
+4. 인프라/영속성 계층 (Infrastructure / Persistence Layer)
+└── repository
+    └── ItemRepository
+```
 
 
 **DTO란?**
