@@ -30,6 +30,7 @@ public class AuthController {
     }
 
     // 로그인
+    @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginReqDto loginReqDto) {
         boolean isSuccess = authService.login(loginReqDto.getEmail(), loginReqDto.getPassword());
         return ResponseEntity.ok(isSuccess);
