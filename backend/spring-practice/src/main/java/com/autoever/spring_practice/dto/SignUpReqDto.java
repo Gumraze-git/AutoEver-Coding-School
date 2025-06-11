@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor
-public class MemberRegDto {
+public class SignUpReqDto {
     private String email;
     private String password;
     private String name;
