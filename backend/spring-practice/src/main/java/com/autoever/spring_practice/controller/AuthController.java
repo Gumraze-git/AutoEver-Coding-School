@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     // 회원 가입
-    @PostMapping("/sign-up") // body에 정보가 보여진다.
+    @PostMapping("/signup") // body에 정보가 보여진다.
     public ResponseEntity<Boolean> signUp(@RequestBody MemberReqDto memberReqDto) {
         boolean isSuccess = authService.signUp(memberReqDto);
         return ResponseEntity.ok(isSuccess);
