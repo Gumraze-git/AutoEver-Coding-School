@@ -1,5 +1,6 @@
 # Spring Boot Practice
 - Spring Boot 백엔드 학습 내용 정리
+- - -
 
 ## 프로젝트 구조
 ```text
@@ -7,13 +8,18 @@ src
 ├── main/java/com/autoever
 │   ├── spring_practice
 │   │   ├── SpringPracticeApplication.java
+│   │   ├── config
+│   │   │   └── SwaggerConfiguration
 │   │   ├── constant
 │   │   │   ├── ItemsSellStatus
 │   │   │   └── OrderStatus
 │   │   ├── controller
 │   │   │   ├── AuthController
+│   │   │   ├── MemberController
 │   │   │   └── RestApiTestController
 │   │   ├── dto
+│   │   │   ├── LoginReqDto
+│   │   │   ├── SignUpReqDto
 │   │   │   ├── MemberRegDto
 │   │   │   └── MemberResDto
 │   │   ├── entity
@@ -23,11 +29,14 @@ src
 │   │   │   ├── OrderItem
 │   │   │   ├── Item
 │   │   │   └── Member
-│   │   └── repository
-│   │       ├── CartRepository
-│   │       ├── ItemRepository
-│   │       ├── MemberRepository
-│   │       └── OrderRepository
+│   │   ├── repository
+│   │   │   ├── CartRepository
+│   │   │   ├── ItemRepository
+│   │   │   ├── MemberRepository
+│   │   │   └── OrderRepository
+│   │   └── service
+│   │       ├── AuthService
+│   │       └── MemberService
 │   ├── resources
 │   │   ├── application.properties
 │   │   └── application-test.properties
@@ -63,25 +72,49 @@ src
 > 이외에는 헥사고날 아키텍처, 클린 아키텍처, 모놀리식 구조, 마이크로서비스 아키텍처 등이 있다.
 
 ### 현재 프로젝트의 계층형 아키텍처
-```
+```text
 1. 프레젠테이션 계층 (Presentation Layer)
 └── controller
     ├── AuthController
+    ├── MemberController
     └── RestApiTestController
 
 2. 애플리케이션 계층 (Application Layer)
-└── (현재 없음)
+└── service
+    ├── AuthService
+    └── MemberService
 
 3. 도메인 계층 (Domain Layer)
 ├── entity
+│   ├── Cart
+│   ├── CartItem
 │   ├── Item
-│   └── Member
+│   ├── Member
+│   ├── Order
+│   └── OrderItem
 └── constant
+    ├── OrderStatus
     └── ItemSellStatus
 
 4. 인프라/영속성 계층 (Infrastructure / Persistence Layer)
 └── repository
-    └── ItemRepository
+    ├── CartRepository
+    ├── ItemRepository
+    ├── MemberRepository
+    └── OrderRepository
+    
+5. 기타 구성 요소
+├── dto
+│   ├── LoginReqDto
+│   ├── SignUpReqDto
+│   ├── MemberRegDto
+│   └── MemberResDto
+└── test
+    ├── SpringPracticeApplicationTests
+    └── repository
+        ├── OrderRepositoryTest
+        ├── ItemRepositoryTest
+        └── CartRepositoryTest
 ```
 
 **DTO란?**
@@ -144,25 +177,25 @@ public class SpringPracticeApplication {
 ```java
 package com.autoever.spring_practice.entity;
 
-@Getter @Setter // Lombok이 getter와 setter 메서드를 자동을 생성해주는 애너테이션이다.
-@ToString // ToString: toString() 메서드를 자동으로 생성하여 객체를 로깅할 때 각 필드의 값을 보기 쉽게 출력한다.
-@Entity // 현재 클래스가 JPA에서 관리되는 엔티티 클래스임을 선언하는 애너테이션이다.
-@Table(name = "item") // 엔티티가 매핑될 실제 DB 테이블의 이름을 지정한다.
+@Getter @Setter // Lombok이 getter와 setter 메서드를 자동을 생성해주는 애너테이션임.
+@ToString // ToString: toString() 메서드를 자동으로 생성하여 객체를 로깅할 때 각 필드의 값을 보기 쉽게 출력함.
+@Entity // 현재 클래스가 JPA에서 관리되는 엔티티 클래스임을 선언하는 애너테이션임.
+@Table(name = "item") // 엔티티가 매핑될 실제 DB 테이블의 이름을 지정함.
 
 public class Item {
-    @Id // 해당 필드(id)가 기본 키(Primary Key) 역할을 한다고 지정한다.
-    @Column(name = "item_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; // @Id가 가리키는 필드
+    @Id // 해당 필드(id)가 기본 키(PK, Primary Key) 역할을 한다고 지정함.
+    @Column(name = "item_id") // Column 이름은 "item_id"로 지정함.
+    @GeneratedValue(strategy = GenerationType.AUTO) // PK를 자동 생성함.
+    private Long id; // @Id가 가리키는 필드임.
 
-    @Column(nullable = false, length = 50)
-    private String itemName;
+    @Column(nullable = false, length = 50) // null 값을 허용하지 않으며, 길이 제한(50)
+    private String itemName; // camelCase로 작성된 itemName은 DB에 snake_case로(item_name)으로 변환된다.
 
     @Column(nullable = false)
     private int price;
 
     @Column(nullable = false)
-    private int stockNumber; // 재고 수량, DB에서는 자동으로 snake 표기법으로 자동 변경된다.
+    private int stockNumber;
 
     @Lob // 해당 필드(itemDescription)를 대용량 데이터로 처리한다는 의미
     @Column(nullable = false, name = "item_description")
@@ -192,27 +225,19 @@ public class Item {
     - JPA가 해당 객체를 persist(처음으로 데이터베이스에 저장하기 직전) 되기 전 등록일 필드에 현재 시간 자동 할당함.
     - 즉, `memberRepository.save(member);` 호출 시, persist가 발생한다.
 
-- **JPA 애너테이션**
-  - `@Entity`: 현재 클래스가 JPA에서 관리되는 엔티티 클래스임을 선언하는 애너테이션이다.
-  - `@Table`: 엔티티가 매핑될 실제 DB 테이블의 이름을 지정한다.
-    - Param: name = ""
-    - 기본값으로는 클래스의 이름이 snake_case로 자동 설정된다.
-  - `@Id`: 해당 필드가 기본 키(Primary Key) 역할을 한다고 지정한다.
+**JPA 애너테이션**
+- `@Id`, `id`필드와 `@GeneratedValue`
+  - `@Id`: `private Long id`가 기본 키(Primary Key) 역할을 한다고 지정한다.
     - 모든 JPA 엔티티는 반드시 하나의 `@Id` 필드를 가져야한다.
     - 기본 키: 관계형 데이터베이스(RDBMS)에서 테이블의 각 행(row)을 고유하게 식별하기 위해 사용하는 유일한 값이다.
-  - `@GeneratedBValue`: 기본 키 값을 지정한다.
+  - `@GeneratedValue`: `private Long id`의 기본 키 값을 생성한다.
     - `strategy = GenerationType.AUTO`: 기본 키 값을 자동 생성 전략을 채택하여 생성함.
-  - `@Column()`: 필드를 DB 컬럼에 매핑할 때 세부 설정을 지정한다.
-    - Param: `nullable`, `lenght`, `unique`, `name`
-  - `@Lob`: 해당 필드를 대용량 데이터로 처리한다는 의미
-    - 예시) 문자열의 경우 `CLOB` 타입으로 저장, 바이너리 데이터의 경우 `BLOB`으로 저장한다.
-  - `@Enumerated`: `Enum` 타입을 DB에 저장할 때 어떤 방식으로 저장할 지 결정한다.
-    - Param: `EnumType.STRING`: `enum` 이름 자체를 문자열로 저장함. 권장되는 방식이다.
-  - `@PrePersist`: 엔티티가 DB에 저장되기 직전에 실행되는 애너테이션이다.
-    - 사용 목적: 등록 일시 설정, 기본 값 설정, 로깅 등 사전 처리에 사용된다.
+- `@Lob`: Large Object의 약자로 대용량 데이터를 처리할 필드에 사용한다.
+  - 예시) 문자열의 경우 `CLOB` 타입으로 저장, 바이너리 데이터의 경우 `BLOB`으로 저장한다.
+- `@Enumerated`: `Enum` 타입을 DB에 저장할 때 어떤 방식으로 저장할 지 결정한다.
+  - Param: `EnumType.STRING`: `enum` 이름 자체를 문자열로 저장한다. 이는 권장되는 방식이다.
 
 - **Lombok 애너테이션**
-  - `@Getter`, `@Setter`: 모든 필드에 대한 get, set 메서드를 자동으로 생성한다.
   - `@ToString`: `toString()` 메서드를 자동으로 생성하여 객체를 로깅할 때 각 필드의 값을 보기 쉽게 출력한다.
   - `@NoArgsConstructor`: 파라미터가 없는 기본 생성자를 자동 생성한다.
     - JPA 규칙: **JPA는 리플렉션을 통해 객체를 생성하므로 기본 생성자가 반드시 필요**하다.
@@ -229,21 +254,21 @@ package com.autoever.spring_practice.entity;
 
 @Entity // Member 클래스가 JPA 엔티티임을 나타낸다.
 @Table(name = "member") // Member 엔티티가 매핑될 테이블의 이름을 지정한다.
-@Getter @Setter // Lombok이 제공하는 자동 getter, setter 메서드 생성 애너테이션
-@NoArgsConstructor // 기본 생성자 생성 애너테이션
+@Getter @Setter
+@NoArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
     private Long id;
 
-    @Column(length = 100)
+    @Column(length = 100) // 길이를 100자로 제한
     private String name;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(unique = true, length = 150)
+    @Column(unique = true, length = 150) // 유일한 값을 사용하도록 설정
     private String email;
 
     @Column(length = 255)
@@ -270,6 +295,10 @@ public class Member {
   - `regDate`
     - JPA가 해당 객체를 persist(처음으로 데이터베이스에 저장하기 직전) 되기 전 등록일 필드에 현재 시간 자동 할당함.
     - 즉, `memberRepository.save(member);` 호출 시, persist가 발생한다.
+
+**JPA 애너테이션**
+- `@PrePersist`: 엔티티가 DB에 저장되기 직전에 실행되는 애너테이션이다.
+  - 사용 목적: 등록 일시 설정, 기본 값 설정, 로깅 등 사전 처리에 사용된다.
 
 - - -
 #### Cart
@@ -572,8 +601,92 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 
 ####
+## 설정 파일
+### application.properties
+- Spring Boot의 설정 파일로 다음과 같은 설정들을 포함한다.
+  - 서버 설정: 포트 번호, 인코딩 방식 등
+  - DB 연결 설정: JDBC URL, 사용자명, 비밀번호, 드라이버 설정 등
+  - JPA 설정: 쿼리 로그 출력 등
+  - 로깅 설정
+  - 기타 스프링 설정: 경로 매칭 전략, 캐시, 메시지 소스 등
+
+**서버 포트 설정**
+```properties
+server.port=8111
+```
+- 애플리케이션을 8111번 포트에서 실행함.
+  - 기본 값은 8080임.
+
+**MySQL 데이터베이스 연결 정보**
+```properties
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/autoever_jpa_mysql_0605
+spring.datasource.username=root
+spring.datasource.password=4109
+```
+
+**경로 매핑 전략 설정**
+```properties
+spring.mvc.pathmatch.matching-strategy=ant_path_matcher
+```
+- 경로 매핑 전략(Path Matching Strategy)을 `AntPathMathcer`로 지정함.
+  - 경로 매핑 전략: Spring에서 HTTP 요청 경로(URL)을 어떤 방식으로 해석하고 매핑할 지 결정하는 방법이다.
+  - 이는 주로 `@RequestMapping`, `@GetMapping`, `@PostMapping` 등에서 URL 패턴과 실제 요청을 비교하여 어떤 컨트롤러 메서드가 실행될 지 결정하는 로직이다.
+
+**SQL 출력 및 로그 상세 등의 기타 정보**
+```properties
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.format_sql=true
+logging.level.org.hibernate.type.descriptor.sql=trace
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=create
+```
+
+- - -
+### build.gradle
+- `Gradle`기반 프로젝트에서 빌드 설정 파일로 사용되는 파일이다.
+- 다음 항목들을 설정하게 된다.
+  - plugins: 사용할 플러그인 지정함.
+  - dependencies: 프로젝트에서 사용할 라이브러리 의존성을 명시함.
+  - repositories: 외부 라이브러리를 가져올 저장소 위치를 명시함.
+  - task: 테스크, 빌드 등의 작업을 정의함.
+
 - - -
 ## 추가 개념 설명
+### Bean
+- Spring에서 Bean은 Spring IoC 컨테이너가 생성하고 관리하는 객체를 의미한다.
+- 주로 애플리케이션의 핵심 구성요소(Controller, Service, Repository 등)들이 Bean으로 등록되어 DI(의존성 주입)를 통해 사용된다.
+
+- - -
+### 의존성 주입(DI, Dependency Injection)
+- 객체가 의존하는 객체를 직접 생성하지 않고 외부(주로 Spring 컨테이너)가 대신 주입해주는 설계 패턴이다.
+  - 객체 A가 객체 B를 필요로 할 때, A가 B를 직접 생성하지 않고 외부에서 주입 받는다.
+  - 결합도를 낮춰 테스트 용이성과 확장성을 높일 수 있다.
+  - Spring framework는 DI를 기반으로 작동한다.
+
+**예시**
+1. 의존성 주입이 없는 경우(강한 결합)
+```java
+public class Car {
+  private Engine engine = new Engine(); // 직접 객체를 생성
+}
+```
+- `Car`는 항상 `Engine`을 내부에서 생성하므로, 다른 종류의 엔진을 사용하거나 테스트하기 어렵다.
+
+2. 의존성 주입을 사용하는 경우
+```java
+public class Car {
+  private final Engine engine;
+
+  // 생성자 주입
+  public Car(Engine engine) {
+    this.engine = engine;
+  }
+}
+```
+- `Car`는 `Engine`에 의존하지만 직접 만들지 않는다.
+- `Engine`객체는 외부에서 주입되므로 유연성과 테스트 용이성을 가지게 된다.
+
 ### 영속성
 **영속성?**
 - 데이터가 일시적이지 않고, 애플리케이션이 종료되어도 유지되는 특성을 의미한다.
@@ -592,8 +705,7 @@ Member member = new Member(); // 현재 비영속 상태
 member.setName("DKim");
 
 // em(EntityManager)의 persist로 member를 영속화한다.
-em.persist(member); 
-
+em.persist(member);
 ```
 
 - - -
