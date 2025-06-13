@@ -175,8 +175,6 @@ public class SpringPracticeApplication {
 - 다음 코드를 통해 시스템에서 상품 정보를 DB에 저장하고 활용하기 위한 도메인 모델이다.
 
 ```java
-package com.autoever.spring_practice.entity;
-
 @Getter @Setter // Lombok이 getter와 setter 메서드를 자동을 생성해주는 애너테이션임.
 @ToString // ToString: toString() 메서드를 자동으로 생성하여 객체를 로깅할 때 각 필드의 값을 보기 쉽게 출력함.
 @Entity // 현재 클래스가 JPA에서 관리되는 엔티티 클래스임을 선언하는 애너테이션임.
@@ -250,8 +248,6 @@ public class Item {
 - 인증, 사용자 관리 기능을 위해 사용되는 기본적인 회원 도메인이다.
 
 ```java
-package com.autoever.spring_practice.entity;
-
 @Entity // Member 클래스가 JPA 엔티티임을 나타낸다.
 @Table(name = "member") // Member 엔티티가 매핑될 테이블의 이름을 지정한다.
 @Getter @Setter
@@ -306,8 +302,6 @@ public class Member {
 - 회원과 1:1 관계를 가지며 장바구니 식별자, 이름, 소유자를 포함하는 구조를 가지고 있다.
 
 ```java
-package com.autoever.spring_practice.entity;
-
 @Getter
 @Setter
 @ToString
@@ -400,8 +394,6 @@ public class CartItem {
   - 한 명의 회원이 여러 개의 주문을 할 수 있으므로 다대일 관계로 설정
   - 하나의 주문은 여러 개의 주문 항목으로 구성되므로 일대다 관계로 설정
 ```java
-package com.autoever.spring_practice.entity;
-
 @Getter
 @Setter
 @ToString
@@ -590,18 +582,551 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 - - -
 #### MemberRepository
+- `MemberRepository`는 `Member`엔티티에 대한 데이터 접근을 담당하는 Spring Data JPA 기반의 라포지토리 인터페이스이다.
+- `JpaRepository<Member, Long>`을 상속함으로써, `Member`엔티티에 대한 기본적인 CRUD 메서드를 사용 가능하다.
+- 이 인터페이스는 `@Repository` 애너테이션이 없어도 Spring이 자동으로 인식하여 빈으로 등록한다.
 
+```java
+package com.autoever.spring_practice.repository;
+
+import com.autoever.spring_practice.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+// JPA 라포지토리 인터페이스를 상속하여 Member 엔티티를 대상으로 id가 Long 타입인 CRUD 기능을 상속 받는다.
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    // 이메일 존재 여부 확인
+    boolean existsByEmail(String email);
+
+    // 이메일 주소로 회원 정보를 조회
+    // 결과가 없을 수 있으므로 Optional<Member>로 반환하여 null 처리를 명확히 한다.
+    Optional<Member> findByEmail(String email);
+
+    // 이메일과 비밀번호를 이용하여 회원 정보를 조회하며, 로그인 성공 및 실패를 확인하기 위해 사용된다.
+    // 마찬가지로 결과가 없을 수 있으므로 Optional으로 반환한다.
+    Optional<Member> findByEmailAndPassword(String email, String password);
+}
+```
+
+**코드 설명**
+- `@Repository`
+  - Spring Data JPA의 Repository 인터페이스(JpaRepository)를 상속 받은 경우, 해당 인터페이스는 직접 구현체가 없어도 자동으로 Bean으로 등록된다.
+- 사용자 정의 쿼리 메서드
+  - `existsByEmail(String email)`
+    - 지정한 이메일이 DB에 존재하는지 여부를 `boolean`값으로 반환한다.
+    - Spring Data JPA의 메서드 이름 기반 쿼리 생성 기능을 활용한 것으로, 다음과 같은 JPQL이 자동으로 생성되었다.
+    - `SELECT CASE WHEN COUNT(m) > 0 THEN TRUE ELSE FALSE END FROM Member m WHERE m.email =: email`
+  - `findByEmail(String email)`
+    - 이메일 주소로 회원 정보를 조회한다.
+    - 위와 동일하게 자동으로 JPQL으로 변환된다.
+    - `SELECT m FROM Member m WHERE m.email =: email`
+  - `findByEmailAndPassword`
+    - 이메일과 비밀번호를 이용하여 로그인 성공 및 실패를 검증한다.
+    - 위와 동일하게 자동으로 JPQL으로 변환된다.
+    - `SELECT m FROM Member m WHERE m.email = :email AND m.password = :password`
 
 - - -
 #### OrderRepository
+- `OrderRepository`는 `Order` 엔티티에 대한 데이터 접근을 담당하는 Spring Data JPA 기반의 Repository 인터페이스이다.
+- `JpaRepository<Order, Long>`을 상속하여 기본적인 CRUD 기능을 제공한다.
+- 추후, 주문 일자, 주문 상태 등을 기반으로 하는 쿼리 메서드를 확장할 수 있는 구조이다.
 
+```java
+public interface OrderRepository extends JpaRepository<Order, Long> {
+}
+
+```
 
 - - -
 #### CartRepository
+- `CartRepository`는 `Cart` 엔티티에 대한 데이터 접근을 담당하는 Spring Data JPA 기반의 Repository 인터페이스이다.
+```java
+@Repository
+public interface CartRepository extends JpaRepository<Cart, Long> {
+}
+
+```
+
+### 애플리케이션 계층
+- 애플리케이션 계층은 소프트웨어 시스템의 비즈니스 작업(Use Case)을 조합하고 실행하는 역할을 담당하는 계층이다.
+- 도메인 계층에 정의된 비즈니스 규칙을 호출하고, 외부 요청(controller)과 내부 로직(entity, repository) 간의 중재자 역할을 수행한다.
+- - -
+#### AuthService
 
 
-####
+```java
+@Slf4j
+@Service // 해당 클래스가 비즈니스 로직을 담는 서비스 컴포넌트임을 명시함.(Spring Bean으로 등록)
+@Transactional // 클래스 내 메서드에 대해 트랙잭션을 자동 적용하여 데이터 정합성을 보장함.
+@RequiredArgsConstructor // final 필드를 자동으로 생성자 주입하여 의존성 주입(DI) 구현함.
+
+public class AuthService {
+    private final MemberRepository memberRepository; // 생성자를 통해 의존성 주입 받음.
+
+    // MemberReqDto를 Member 엔티티로 수동 매핑함.
+    private Member convertDtoToEntity(MemberReqDto memberReqDto) {
+        Member member = new Member();
+        member.setEmail(memberReqDto.getEmail());
+        member.setPassword(memberReqDto.getPassword());
+        member.setName(memberReqDto.getName());
+        return member;
+    }
+
+    // 이메일로 기존 회원 여부를 조회함.
+    public boolean isMember(String email) {
+        return memberRepository.existsByEmail(email); // 내부적으로 MemberRepository.existsByEmail()을 호출하여 DB에 해당 이메일이 존재하는지 확인함.
+    }
+
+    // 회원가입 요청 정보를 담고 있는 DTO을 받아, Member 엔티티로 변환 후 저장함.
+    public boolean signUp(MemberReqDto memberReqDto) {
+        try {
+            Member member = convertDtoToEntity(memberReqDto); // 회원가입 요청 정보를 담고 있는 Dto를 받아 Member 엔티티로 변환 후 저장함.
+            memberRepository.save(member);
+            return true;
+
+        } catch (Exception e) { // 예외 발생 false를 반환하고 로그에 오류 메시지를 출력함.
+            log.error("회원 가입 시 오류 발생: {}", e.getMessage());
+            return false;
+        }
+    }
+
+    // 이메일과 비밀번호로 회원을 조회하고 존재 여부에 따라 로그인 성공 여부를 반환함.
+    public boolean login(String email, String password) {
+        Optional<Member> member = memberRepository.findByEmailAndPassword(email, password); // 내부적으로 findByEmailAndPassword() 호출
+        return member.isPresent(); // member의 존재 여부를 boolean으로 확인
+    }
+}
+
+```
+- - -
+#### MemberService
+- `MemberService`는 사용자 정보 관리(회원 조회, 수정, 삭제 등)를 담당하는 애플리케이션 계층의 서비스 클래스이다.
+- `AuthService`가 인증(가입/로그인)을 담당한다면, `MemberService`는 그 이후의 회원 관리 기능을 책임진다.
+- `Controller`로부터 호출하여 요청을 처리하고, 내부적으로 `MemberRepository`와 `Member` 엔티티를 조작하여 결과를 반환한다.
+
+```java
+@Slf4j
+@Service
+@Transactional // 클래스 내의 모든 메서드에 트랜잭션을 적용함.
+@RequiredArgsConstructor // final 필드를 대상으로 생성자를 자동 생성하여 의존성 주입을 수행함.
+public class MemberService {
+    private final AuthService authService;
+    private final MemberRepository memberRepository;
+
+    // Entity를 DTO로 변환하는 메서드
+    // Member 엔티티를 MemberResDto로 변환하여 반환하는 내부 메서드
+    // 비즈니스 로직과 프레젠테이션 계층 간 데이터 분리 및 보안성 확보
+    public MemberResDto convertEntityToDto(Member member) {
+        MemberResDto memberResDto = new MemberResDto();
+        memberResDto.setEmail(member.getEmail());
+        memberResDto.setName(member.getName());
+        memberResDto.setPassword(member.getPassword());
+        memberResDto.setRegDate(member.getRegDate());
+        memberResDto.setImage(member.getImage());
+        return memberResDto;
+    }
+
+    // 회원 전체 조회: DB에 존재하는 모든 회원 정보를 조회하고, 이를 MemberResDto 형태로 반환하여 리스트로 반환함.
+    public List<MemberResDto> findAll() {
+        List<Member> members = memberRepository.findAll(); // DB의 정보를 Member Entity에 담음
+        List<MemberResDto> memberResDtoList = new ArrayList<>(); // Dto List 생성
+
+        for (Member member : members) {
+            memberResDtoList.add(convertEntityToDto(member));
+        }
+        return memberResDtoList;
+    }
+    
+    // 상세 회원 조회: 이메일을 기준으로 회원을 찾음.
+    public MemberResDto findByEmail(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("해당 회원이 존재하지 않습니다.") // 회원이 존재하지 않는 경우에는 RuntimeException을 반환함.
+        );
+        return convertEntityToDto(member);
+    }
+
+    // 회원 정보 수정: 이메일을 기준으로 회원을 찾고, 해당 정보를 Dto 값으로 수정함.
+    public boolean modifyMember(MemberResDto memberResDto) {
+        try {
+            Member member = memberRepository.findByEmail(memberResDto.getEmail()).orElseThrow(
+                    () -> new RuntimeException("해당 회원이 존재하지 않습니다.")
+            );
+            member.setEmail(memberResDto.getEmail());
+            member.setPassword(memberResDto.getPassword());
+            memberRepository.save(member); // save()를 통해 변경 사항을 영속화하며 성공 여부는 boolean으로 반환함.
+            return true;
+        } catch (Exception e) {
+            log.error("회원 정보 수정 실패: {}", e.getMessage());
+            return false;
+        }
+    }
+
+    // 회원 정보 삭제: 이메일을 기분으로 회원을 조회하고 삭제함.
+    public boolean deleteMember(String email) {
+        try {
+            Member member = memberRepository.findByEmail(email).orElseThrow(
+                    () -> new RuntimeException("해당 회원이 존재하지 않습니다.") // 회원 정보가 없으면 500 error를 발생시키며 메시지를 전달
+            );
+            memberRepository.delete(member); // 회원 정보 삭제
+            return true;
+        } catch (Exception e) {
+            log.error("회원 정보 삭제 실패: {}", e.getMessage());
+            return false;
+        }
+    }
+}
+```
+- - -
+
+### 프레젠테이션 계층
+- 프레젠테이션 계층은 사용자와 직접 상호작용하는 계층이다.
+- 사용자로부터 HTTP 요청을 수신하고, 이를 애플리케이션 계층(`service`)에 전달한 뒤 처리 결과를 HTTP 응답으로 반환하는 역할을 한다.
+- 주요 역할
+  - 요청 수신: 클라이언트로부터 HTTP 요청을 수신
+  - 요청 매핑: URL, HTTP method(GET, POST 등)에 따라 컨트롤러 메서드로 매핑
+  - DTO 매핑: 요청 JSON 데이터를 DTO 객체로 매핑하여 서비스에 전달
+  - 응답 반환: 서비스 결과를 클라이언트에게 JSON 등의 형식으로 반환
+
+- - -
+#### MemberController
+- `MemberController`는 회원 정보 관리 기능(조회, 수정, 삭제)을 처리하는 프레젠테이션 
+
+```java
+@Slf4j
+@RestController // REST API 응답(JSON)을 반환하는 컨트롤러 클래스 임을 선언함.
+@RequiredArgsConstructor  // final 필드에 대한 생성자를 자동 생성하여 의존성 주입 수행함.
+@CrossOrigin(origins = { // CORS 정책 허용 - React 앱(포트 3000, 5173)에서의 접근 허용
+        "http://localhost:3000",
+        "http://localhost:5173"
+})
+@RequestMapping("/users") // 이 컨트롤러의 모든 경로는 /user로 시작함.
+public class MemberController {
+    private final MemberService memberService;
+
+    // 회원 전체 조회: 모든 회원 정보를 조회하여 List<MemberResDto> 형태로 반환함.
+    @GetMapping("/list") // 이 메서드의 경로는 /user/list임.
+    public ResponseEntity<List<MemberResDto>> getMembers() {
+        return ResponseEntity.ok(memberService.findAll()); // 응답 상태 HTTP 200 OK
+    }
+
+    // 회원 상세 조회: 특정 이메일을 기반으로 회원 정보를 조회함.
+    @GetMapping("/detail/{email}") // 이 메서드의 경로는 /user/detail/testEmail임
+    public ResponseEntity<MemberResDto> getMember(@PathVariable String email) { // URL 경로 변수로 이메일을 받아, MemberService.findByEmail(email)을 호출함.
+        return ResponseEntity.ok(memberService.findByEmail(email));
+    }
+
+    // 회원 정보 수정
+    @PutMapping("/modify") // 이 메서드의 경로를 /user/modify임
+    public ResponseEntity<Boolean> updateMember(@RequestBody MemberResDto memberResDto) { // 요청 본문(@RequestBody)에 담긴 회원 정보를 바탕으로 수정 작업을 수행한다.
+        return ResponseEntity.ok(memberService.modifyMember(memberResDto));
+    }
+
+    // 회원 삭제: 이메일을 기준으로 해당 회원을 삭제한다.
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<Boolean> deleteMember(@PathVariable String email) {
+        return ResponseEntity.ok(memberService.deleteMember(email));
+    }
+}
+```
+
+**데이터 흐름**
+```text
+[Client] ⇄ [MemberController]
+                    │
+                    ▼
+            [MemberService]
+                    │
+                    ▼
+           [MemberRepository / Member Entity]
+```
+- 요청 JSON은 `MemberResDto`로 매핑되고, 
+- 응답은 `MemberResDto` 또는 `Boolean`으로 전달된다.
+
+- - -
+#### AuthController
+- `AuthController`는 사용자 인증(Authentication)과 관련된 요청을 처리하는 프레젠테이션 계층의 컨트롤러이다.
+- 클라이언트가 회원 가입, 로그인, 이메일 중복 확인 등을 요청할 때 진입하는 REST 엔드포인트를 제공하며, 내부적으로 AuthService를 호출하여 로직을 처리한다.
+
+```java
+@Slf4j
+@RestController // REST API 요청을 처리하고 JSON 응답을 반환하는 컨트롤러임.
+@RequiredArgsConstructor
+@RequestMapping("/auth")
+public class AuthController {
+    private final AuthService authService;
+
+    // 이메일 중복 확인: 이메일을 전달 받아, 이미 등록된 이메일인지 확인함.
+    @GetMapping("/exists/{email}")
+    public ResponseEntity<Boolean> existsByEmail(@PathVariable String email) { // 내부적으로 authService.isMember(email)을 호출하여 DB를 조회함.
+        boolean isExists = authService.isMember(email);
+        return ResponseEntity.ok(!isExists); // 응답은 사용 가능 여부를 의미하며, 중복되지 않았을 경우 true를 반환함.
+    }
+
+    // 회원 가입: 전달 받은 @RequestBody를 MemberReqDto로 수신함.
+    @PostMapping("/signup")
+    public ResponseEntity<Boolean> signUp(@RequestBody MemberReqDto memberReqDto) {
+        boolean isSuccess = authService.signUp(memberReqDto);
+        return ResponseEntity.ok(isSuccess); // 가입 성공 여부를 Boolean 형태로 응답함.
+    }
+
+    // 로그인: 이메일과 비밀번호를 담은 LoginReqDto를 @RequestBody로 전달 받음.
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestBody LoginReqDto loginReqDto) { 
+        boolean isSuccess = authService.login(loginReqDto.getEmail(), loginReqDto.getPassword());
+        return ResponseEntity.ok(isSuccess); // 로그인 성공 시 true를 반환함.
+    }
+
+}
+```
+
+**데이터 흐름 구조**
+```text
+[Client] 
+   ↓ (HTTP 요청: /auth/signup, /auth/login 등)
+[AuthController]
+   ↓ (DTO 매핑)
+[AuthService]
+   ↓ (비즈니스 로직 수행)
+[MemberRepository / Entity]
+   ↑
+[AuthService]
+   ↑
+[AuthController]
+   ↑ (ResponseEntity 반환)
+[Client]
+```
+- - -
+
+#### RestApiTestController
+- 간단한 REST API 테스트 하기 위한 컨트롤러 클래스이다.
+- GET 방식 요청을 처리하며, URL 경로 변수, 쿼리 파라미터 기본 응답 처리 방식을 실습하는 예제이다.
+```java
+@RestController
+@RequestMapping("/api")
+public class RestApiTestController {
+    @GetMapping("/hello")
+    public String getHello() {
+        return "Hello Spring Boot!";
+    }
+
+    @GetMapping("/board/{variable}")
+    public String getVariable(@PathVariable String variable) {
+        return variable;
+    }
+    
+    public String getRegParam(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam String company
+    ) {
+        return name + " " + email + " " + company;
+    }
+}
+```
+
+### DTO
+- DTO는 계층 간 데이터 전달을 위한 객체로 프레젠테이션 계층(controller)과 애플리케이션 계층(service) 사이에서 사용된다.
+- DTO는 DB와 직접 연동되는 `Entity` 객체와는 다르게, 입력/출력 데이터를 목적에 맞게 가공하여 전달한다.
+- 주요 목적
+  - 데이터 캡술화: 클라이언트로부터 전달받거나 응답할 데이터를 구조화함.
+  - 보안성 확보: `Entity`를 직접 노출하지 않음으로 DB 구조 보호
+  - 유연성 향상: 필요한 필드만 포함하여 클라이언트 요구사항에 맞는 형태로 데이터를 전달함.
+  - 관심사 분리: `View/Controller` 계층과 `Entity`(도메인 모델) 간의 책임을 분리함.
+
+**사용 흐름**
+```text
+[Client] → [Controller] → [DTO] → [Service] → [Entity] → [Repository]
+                    ↑                          ↓
+                응답 DTO                 DB 저장용 Entity
+```
+- 입력 요청: 클라이언트에서 전송항 JSON은 DTO로 파싱됨.
+- 출력 응답: `Entity` -> `DTO`로 변환하여 민감 정보 없이 결과를 반환함.
+- - -
+#### LoginReqDto
+- `LoginReqDto`는 로그인 요청 시 클라이언트로부터 전달되는 데이터(email, password)를 담는 DTO 클래스이다.
+- 주로 `POST` `/auth/login` 요청에서 `@RequestBody`를 통해 JSON 요청을 객체로 변환하는데 사용된다.
+
+```java
+@Getter
+@Setter
+@NoArgsConstructor // 파라미터가 없는 기본 생성자 자동 생성함.
+
+public class LoginReqDto {
+    private String email;
+    private String password;
+}
+```
+
+**사용 예시**
+- JSON 요청 본문
+```json
+{
+  "email": "user@example.com",
+  "password": "secure1234"
+}
+```
+
+- Controller에서 사용
+```java
+@PostMapping("/login")
+public ResponseEntity<Boolean> login(@RequestBody LoginReqDto loginReqDto) {
+    return ResponseEntity.ok(authService.login(
+        loginReqDto.getEmail(),
+        loginReqDto.getPassword()
+    ));
+}
+```
+- - -
+#### MemberReqDto 
+- `MemberReqDto`는 클라이언트가 회원 가입 요청 시 전달하는 입력 데이터를 담는 전용 DTO 클래스이다.
+- 이 DTO는 `Controller`에서 JSON 요청 본문을 객체로 바인딩한 뒤, `Service` 계층으로 전달되어 `Entity` 변환되어 저장되는 역할을 한다.
+
+```java
+@Getter
+@Setter
+@NoArgsConstructor
+
+public class MemberReqDto {
+    private String email;
+    private String password;
+    private String name;
+}
+
+```
+
+**사용 예시**
+```text
+[클라이언트] → (JSON 요청) → [AuthController] → [MemberReqDto] → [AuthService] → [Member Entity] → [Repository]
+```
+- 클라이언트가 회원 가입 정보를 JSON으로 전송
+- `@RequestBody`를 통해 JSON이 `MemberReqDto` 객체로 자동 바인딩
+- `Service` 계층에서 `MemberReqDto`를 `MemberEntity` 변환
+- 변환된 `Entity`를 DB에 저장
+
+**요청 JSON**
+```json
+{
+  "email": "user@example.com",
+  "password": "secure1234",
+  "name": "홍길동"
+}
+```
+- - -
+#### MemberResDto
+- `MemberResDto`는 회원 정보를 클라이언트에 응답할 때 사용하는 출력 전용 DTO 클래스이다.
+- 서비스 계층에서 `Entity (Member)` 객체를 클라이언트에 전달하기 적절한 형식으로 변환하여 반환하는데 사용된다.
+```java
+@Getter
+@Setter
+@NoArgsConstructor @AllArgsConstructor
+public class MemberResDto {
+    private String email;
+    private String name;
+    private String password;
+    private String image;
+    private LocalDateTime regDate;
+}
+```
+**사용 흐름**
+```text
+[DB Member Entity] → [MemberService] → [MemberResDto] → [Controller] → [클라이언트 응답]
+```
+- `Repository`를 통해 조회된 `Member`엔티티 객체를 
+- `Service` 계층에서 `MemberResDto`로 변환하고
+- `Controller`에서 클라이언트에 응답(`ResponseEntity`)에 담아 반환한다.
+
+- - -
+#### SignUpReqDto
+- `SignUpReqDto`는 회원 가입 요청 시 클라이언트로부터 전달받는 입력 데이터를 담는 DTO이다.
+- 주로 POST `/auth/signup`과 같은 API에서 요청(Request) 바디로 전달되는 JSON 데이터를 자바 객체로 매핑하는 데 사용된다.
+```java
+@Getter
+@Setter
+@NoArgsConstructor
+public class SignUpReqDto {
+    private String email;
+    private String password;
+    private String name;
+}
+```
+**사용 흐름**
+```text
+[Client] → [Request Body(JSON)] → [SignUpReqDto] → [Controller] → [Service] → [Entity로 변환 후 저장]
+```
+- 클라이언트에서 회원 가입 폼을 작성하여 서버로 전송
+- Spring이 JSON 데이터를 `SignUpReqDto`로 바인딩하여 `Controller`로 전달
+- 이후 `AuthService`등에서 DTO를 `Member Entity`로 변환하여 저장 처리한다.
+
+**요청 JSON**
+```json
+{
+  "email": "test@example.com",
+  "password": "secure1234",
+  "name": "홍길동"
+}
+```
+- - -
 ## 설정 파일
+### Swagger
+- Open API의 Swagger는 RESTful API 문서화 및 테스트를 위한 도구 및 프레임워크이다.
+- Spring Boot와 함께 사용하면 API 명세 자동 생성, 테스트용 UI 제공, 개발자와 클라이언트 간의 소통 효율화 등의 목적을 달성 할 수 있다.
+  - API 명세 자동 생성: Spring의 `@RestController`, `@RequestMapping`, `@GetMapping` 등을 기반으로 API 설명 자동 추출
+  - Swagger UI 제공
+
+#### Swagger 설정 방법
+1. **의존성 추가**
+```groovy
+dependencies {
+  implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
+}
+```
+- 최신 Spring Boot에서는 `springdoc-openapi`가 Swagger 기능을 제공하는 표준이다.
+2. Swagger 설정 클래스
+```java
+@Slf4j
+@Configuration // 해당 클래스가 Spring 설정 클래스임을 나타낸다. Bean 등록이 가능함.
+@EnableSwagger2 // Swagger 2 사용을 활성화함.
+public class SwaggerConfiguration {
+    @Bean
+    public Docket api() {
+        log.info("[Message] Request Swagger Configuration");
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo()) // 아래의 apiInfo() 메서드를 통해 API의 정보 설정 
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.autoever.spring_practice"))
+                .paths(PathSelectors.any()) // 모든 경로 포함
+                .build();
+    }
+    
+    private ApiInfo apiInfo() { // Swagger Api 페이지에 표시할 정보 입력
+        log.info("[Message] Request Swagger Configuration apiInfo()");
+        return new ApiInfoBuilder()
+                .title("Spring Boot Open API Test with Swagger")
+                .description("Hyundai Autoever Coding School Practice")
+                .version("1.0.0")
+                .build();
+    }
+}
+```
+**코드 설명**
+- `Docket`: Swagger 설정 객체로 Swagger 문서의 전반적인 동작 방식을 정의하는 도구임.
+- `DocumentationType.Swagger2`: Swagger 2.0 문서 형태로 생성함.
+
+#### Swagger 사용 방법
+**기본 접속 URL**
+```text
+http://localhost:포트번호/swagger-ui.html
+```
+
+위의 경우에서는 다음 주소를 입력하면 사용 가능하다.
+```text
+http://localhost:8111/swagger-ui.html
+```
+
+서버를 실행시키고 위 링크를 접속하면 다음과 같은 웹 페이지로 이동 가능하다.
+![swagger.png](img/swagger.png)
+
 ### application.properties
 - Spring Boot의 설정 파일로 다음과 같은 설정들을 포함한다.
   - 서버 설정: 포트 번호, 인코딩 방식 등
@@ -652,7 +1177,86 @@ spring.jpa.hibernate.ddl-auto=create
   - task: 테스크, 빌드 등의 작업을 정의함.
 
 - - -
+## 클래스 구조
+![class_diagram.png](img/class_diagram.png)
+
+- - -
+## 데이터 베이스 구조
+
+![diagram.png](img/diagram.png)
+
+- - -
+
 ## 추가 개념 설명
+### JPA
+- JPA(Java Persistence API): Java 객체와 관계형 데이터베이스 사이의 매핑을 정의하는 표준 인터페이스 사양이다.
+  - 자바에서 객체와 관계형 데이터베이스 사이의 매핑을 도와주는 ORM(Objected-Relational Mapping) 표준 인퍼페이스이다.
+  - JPA 동작 흐름
+```text
+[Entity 클래스 작성] 
+     ↓
+[Repository 생성 (Spring Data JPA)]
+     ↓
+[Service에서 save(), findById() 등 호출]
+     ↓
+[JPA가 SQL로 변환하여 DB에 실행]
+     ↓
+[결과를 자바 객체로 매핑하여 반환]
+```
+- Hibernate(JPA 구현체): JPA를 실제로 구현한 라이브러리로 Entity와 Table 같에 매핑을 처리한다.
+- Spring Data JPA: JPA를 Spring과 통합하여 Repository 인터페이스만으로 쿼리 메서드를 자동 생성하는 기능을 제공한다.
+
+#### Spring Data JPA: JpaRepository
+Spring Data JPA에서 제공하는 JpaRepository는 다음과 같은 CRUD 메서드들을 자동을 사용할 수 있다.
+
+| 메서드                           | 설명                               |
+|-------------------------------|----------------------------------|
+| `save(Repository repository)` | `Repository` 객체를 저장하거나 수정        |
+| `findById(Long id)`           | 기본 키(`id`)를 이용하여 찾고자 하는 정보를 반환   |
+| `findAll()`                   | 모든 저장소의 정보 조회                    |
+| `deleteById(Long id)`         | `id`에 해당하는 저장소의 정보 삭제            |
+| `count`                       | 저장소에 있는 정보 개수 조회                 |
+| `existById`                   | 저장소에 해당 `ID`를 가진 정보가 존재하는지 여부 확인 |
+
+- 필요한 경우 다음과 같이 쿼리 메서드를 선언하여 기능을 확장할 수 있다.
+```java
+List<Order> findByMemberId(Long memberId);
+List<Order> findByOrderStatus(OrderStatus orderStatus);
+```
+- - -
+### Transaction
+- 하나의 작업 단위를 구성하는 연산들의 집합으로, 전부 성공하거나 전부 실패해야하는 원자적 작업(atomic operation)이다.
+- 일반적으로 데이터베이스에서 데이터의 정합성을 보장하기 위해 사용된다.
+  - 데이터 정합성: 데이터의 정확성, 일관성, 신뢰성을 유지하는 것
+- 특징(ACID)
+  - 원자성(A, Atomicity): 트랜잭션의 모든 연산은 전부 성공하거나 전부 실패해야함.
+  - 일관성(C, Consistency): 트랜잭션 전후의 데이터는 항상 유요한 상태를 유지해야함.
+  - 격리성(I, Isolation): 동시에 실행되는 트랜잭션은 서로의 작업에 영향을 주지 않아야함.
+  - 지속성(D, Durability): 성공한 트랜잭션의 결과는 시스템 장애가 발생해도 유지된.
+
+> `@Transaction`을 클래스 수준에 선언할 경우, 조회성 메서드에는 `readOnly=true` 옵션을 추가해야 성능에 좋다.
+
+### 연관관계 매핑(Entity Relationship Mapping)
+- OOP에서 객체 간의 관계를 RDBMS의 테이블 간 외래 키 관계로 변환하는 작업이다.
+
+**JPA의 대표적인 연관관계 매핑**
+
+| 매핑 방식         | 설명     | 예시        |
+|---------------|--------|-----------|
+| `@OneToOne`   | 1:1 관계 | 회원과 장바구니  |
+| `@OneToMany`  | 1:N 관계 | 주문과 주문상품  |
+| `@ManyToOne`  | N:1 관계 | 주문 상품과 상품 |
+| `@ManyToMany` | N:M 관계 | 학생과 ㄱ강의   |
+- - -
+
+### 지연 로딩/ 즉시 로딩
+- 연관된 엔티티를 조회할 때, 언제 데이터를 실제로 로딩할 것인지 결정하는 전략이다.
+
+| 전략           | 설명                                                       | 장단점                       |
+|--------------|----------------------------------------------------------|---------------------------|
+| 지연 로딩(Lazy)  | 연관된 엔티티를 실제로 사용하는 시점에 DB를 조회                             | 성능 최적화에 유리하나 `N + 1`문제 주의 |
+| 즉시 로딩(Eager) | 엔티티를 조회할 때 연관된 모든 엔티티도 함께 조회 | 간단하지만 과도한 조인이 발생할 수 있음.   |
+- - -
 ### Bean
 - Spring에서 Bean은 Spring IoC 컨테이너가 생성하고 관리하는 객체를 의미한다.
 - 주로 애플리케이션의 핵심 구성요소(Controller, Service, Repository 등)들이 Bean으로 등록되어 DI(의존성 주입)를 통해 사용된다.
@@ -707,7 +1311,54 @@ member.setName("DKim");
 // em(EntityManager)의 persist로 member를 영속화한다.
 em.persist(member);
 ```
+- - - 
+### 애너테이션 정리
+- - -
+#### Spring Framework 관련 애너테이션
 
+| 애너테이션               | 적용 대상      | 설명                                                                 |
+|--------------------------|----------------|----------------------------------------------------------------------|
+| @SpringBootApplication   | 클래스         | 스프링 부트 애플리케이션의 시작점. 여러 설정 애너테이션을 포함한 복합 애너테이션 |
+| @RestController          | 클래스         | JSON 응답을 반환하는 REST API 컨트롤러 (@Controller + @ResponseBody) |
+| @RequestMapping          | 클래스/메서드  | HTTP 요청을 특정 핸들러 메서드로 매핑                               |
+| @GetMapping / etc.       | 메서드         | HTTP GET, POST, PUT, DELETE 요청 매핑                              |
+| @RequestParam            | 메서드 파라미터| 쿼리 파라미터를 메서드 인자로 바인딩                               |
+| @PathVariable            | 메서드 파라미터| URL 경로 변수 바인딩                                                |
+| @RequestBody             | 메서드 파라미터| JSON 요청 본문을 DTO로 변환하여 바인딩                              |
+| @ResponseBody            | 메서드         | 반환 값을 HTTP 응답 본문으로 반환 (JSON 직렬화)                    |
+| @CrossOrigin             | 클래스/메서드  | CORS 정책 설정                                                       |
+| @Service                 | 클래스         | 비즈니스 로직 계층, Bean 등록                                       |
+| @Repository              | 클래스         | 영속성 계층, Bean 등록 및 예외 변환                                 |
+| @Component               | 클래스         | 스프링 Bean으로 등록되는 컴포넌트                                   |
+| @Configuration           | 클래스         | Java 기반 설정 클래스                                               |
+| @Bean                    | 메서드         | 수동으로 Bean을 등록할 때 사용                                      |
+| @Transactional           | 클래스/메서드  | 트랜잭션 처리 지원, 정합성 보장                                     |
+| @Slf4j                   | 클래스         | 로깅 기능 지원 (Lombok)                                              |
+- - -
+#### JPA 관련 애너테이션
+
+| 애너테이션               | 적용 대상      | 설명                                                                 |
+|--------------------------|----------------|----------------------------------------------------------------------|
+| @Entity                  | 클래스         | JPA 엔티티 클래스임을 명시, 테이블로 매핑                            |
+| @Table(name = "...")     | 클래스         | 매핑될 실제 DB 테이블 이름 지정                                      |
+| @Id                      | 필드           | 기본 키(PK) 지정                                                     |
+| @GeneratedValue          | 필드           | 기본 키 자동 생성 전략 지정                                          |
+| @Column                  | 필드           | DB 컬럼 매핑 및 속성 정의 (이름, 제약 조건 등)                      |
+| @Enumerated              | 필드           | Enum 저장 방식 지정 (기본 ORDINAL → 권장: STRING)                  |
+| @Lob                     | 필드           | 대용량 데이터(CLOB, BLOB) 매핑                                      |
+| @ManyToOne / etc.        | 필드           | 엔티티 간 연관관계 매핑 (@OneToMany, @OneToOne, @ManyToMany 등 포함) |
+| @JoinColumn              | 필드           | 외래 키 매핑 컬럼 지정                                               |
+| @PrePersist              | 메서드         | 엔티티가 저장되기 직전에 실행되는 콜백 메서드                        |
+- - -
+#### Lombok 관련 애너테이션
+
+| 애너테이션               | 적용 대상      | 설명                                                                 |
+|--------------------------|----------------|----------------------------------------------------------------------|
+| @Getter / @Setter        | 클래스/필드    | Getter/Setter 자동 생성                                              |
+| @ToString                | 클래스         | toString() 메서드 자동 생성                                          |
+| @NoArgsConstructor       | 클래스         | 파라미터 없는 생성자 자동 생성                                       |
+| @AllArgsConstructor      | 클래스         | 모든 필드를 인자로 받는 생성자 생성                                  |
+| @RequiredArgsConstructor | 클래스         | final 또는 @NonNull 필드만 생성자에 포함하여 생성                    |
 - - -
 ## 참고 자료
 - https://www.baeldung.com/cs/layered-architecture
