@@ -70,7 +70,7 @@ src
 4. 인프라/영속성/DB 계층(Infrastructure/persistence/Database layer): 데이터 및 데이터베이스 통신을 담당한다. 
 
 > 이외에는 헥사고날 아키텍처, 클린 아키텍처, 모놀리식 구조, 마이크로서비스 아키텍처 등이 있다.
-
+- - -
 ### 현재 프로젝트의 계층형 아키텍처
 ```text
 1. 프레젠테이션 계층 (Presentation Layer)
@@ -647,14 +647,13 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 }
 
 ```
-
+- - -
 ### 애플리케이션 계층
 - 애플리케이션 계층은 소프트웨어 시스템의 비즈니스 작업(Use Case)을 조합하고 실행하는 역할을 담당하는 계층이다.
 - 도메인 계층에 정의된 비즈니스 규칙을 호출하고, 외부 요청(controller)과 내부 로직(entity, repository) 간의 중재자 역할을 수행한다.
+
 - - -
 #### AuthService
-
-
 ```java
 @Slf4j
 @Service // 해당 클래스가 비즈니스 로직을 담는 서비스 컴포넌트임을 명시함.(Spring Bean으로 등록)
@@ -777,8 +776,8 @@ public class MemberService {
     }
 }
 ```
-- - -
 
+- - -
 ### 프레젠테이션 계층
 - 프레젠테이션 계층은 사용자와 직접 상호작용하는 계층이다.
 - 사용자로부터 HTTP 요청을 수신하고, 이를 애플리케이션 계층(`service`)에 전달한 뒤 처리 결과를 HTTP 응답으로 반환하는 역할을 한다.
@@ -896,8 +895,8 @@ public class AuthController {
    ↑ (ResponseEntity 반환)
 [Client]
 ```
-- - -
 
+- - -
 #### RestApiTestController
 - 간단한 REST API 테스트 하기 위한 컨트롤러 클래스이다.
 - GET 방식 요청을 처리하며, URL 경로 변수, 쿼리 파라미터 기본 응답 처리 방식을 실습하는 예제이다.
@@ -925,6 +924,7 @@ public class RestApiTestController {
 }
 ```
 
+- - -
 ### DTO
 - DTO는 계층 간 데이터 전달을 위한 객체로 프레젠테이션 계층(controller)과 애플리케이션 계층(service) 사이에서 사용된다.
 - DTO는 DB와 직접 연동되는 `Entity` 객체와는 다르게, 입력/출력 데이터를 목적에 맞게 가공하여 전달한다.
@@ -942,6 +942,7 @@ public class RestApiTestController {
 ```
 - 입력 요청: 클라이언트에서 전송항 JSON은 DTO로 파싱됨.
 - 출력 응답: `Entity` -> `DTO`로 변환하여 민감 정보 없이 결과를 반환함.
+
 - - -
 #### LoginReqDto
 - `LoginReqDto`는 로그인 요청 시 클라이언트로부터 전달되는 데이터(email, password)를 담는 DTO 클래스이다.
@@ -977,6 +978,7 @@ public ResponseEntity<Boolean> login(@RequestBody LoginReqDto loginReqDto) {
     ));
 }
 ```
+
 - - -
 #### MemberReqDto 
 - `MemberReqDto`는 클라이언트가 회원 가입 요청 시 전달하는 입력 데이터를 담는 전용 DTO 클래스이다.
@@ -1012,6 +1014,7 @@ public class MemberReqDto {
   "name": "홍길동"
 }
 ```
+
 - - -
 #### MemberResDto
 - `MemberResDto`는 회원 정보를 클라이언트에 응답할 때 사용하는 출력 전용 DTO 클래스이다.
@@ -1068,12 +1071,14 @@ public class SignUpReqDto {
 ```
 - - -
 ## 설정 파일
+- - -
 ### Swagger
 - Open API의 Swagger는 RESTful API 문서화 및 테스트를 위한 도구 및 프레임워크이다.
 - Spring Boot와 함께 사용하면 API 명세 자동 생성, 테스트용 UI 제공, 개발자와 클라이언트 간의 소통 효율화 등의 목적을 달성 할 수 있다.
   - API 명세 자동 생성: Spring의 `@RestController`, `@RequestMapping`, `@GetMapping` 등을 기반으로 API 설명 자동 추출
   - Swagger UI 제공
 
+- - -
 #### Swagger 설정 방법
 1. **의존성 추가**
 ```groovy
@@ -1113,6 +1118,7 @@ public class SwaggerConfiguration {
 - `Docket`: Swagger 설정 객체로 Swagger 문서의 전반적인 동작 방식을 정의하는 도구임.
 - `DocumentationType.Swagger2`: Swagger 2.0 문서 형태로 생성함.
 
+- - -
 #### Swagger 사용 방법
 **기본 접속 URL**
 ```text
@@ -1127,6 +1133,7 @@ http://localhost:8111/swagger-ui.html
 서버를 실행시키고 위 링크를 접속하면 다음과 같은 웹 페이지로 이동 가능하다.
 ![swagger.png](img/swagger.png)
 
+- - -
 ### application.properties
 - Spring Boot의 설정 파일로 다음과 같은 설정들을 포함한다.
   - 서버 설정: 포트 번호, 인코딩 방식 등
@@ -1188,6 +1195,7 @@ spring.jpa.hibernate.ddl-auto=create
 - - -
 
 ## 추가 개념 설명
+- - -
 ### JPA
 - JPA(Java Persistence API): Java 객체와 관계형 데이터베이스 사이의 매핑을 정의하는 표준 인터페이스 사양이다.
   - 자바에서 객체와 관계형 데이터베이스 사이의 매핑을 도와주는 ORM(Objected-Relational Mapping) 표준 인퍼페이스이다.
@@ -1236,6 +1244,7 @@ List<Order> findByOrderStatus(OrderStatus orderStatus);
 
 > `@Transaction`을 클래스 수준에 선언할 경우, 조회성 메서드에는 `readOnly=true` 옵션을 추가해야 성능에 좋다.
 
+- - -
 ### 연관관계 매핑(Entity Relationship Mapping)
 - OOP에서 객체 간의 관계를 RDBMS의 테이블 간 외래 키 관계로 변환하는 작업이다.
 
@@ -1247,8 +1256,8 @@ List<Order> findByOrderStatus(OrderStatus orderStatus);
 | `@OneToMany`  | 1:N 관계 | 주문과 주문상품  |
 | `@ManyToOne`  | N:1 관계 | 주문 상품과 상품 |
 | `@ManyToMany` | N:M 관계 | 학생과 ㄱ강의   |
-- - -
 
+- - -
 ### 지연 로딩/ 즉시 로딩
 - 연관된 엔티티를 조회할 때, 언제 데이터를 실제로 로딩할 것인지 결정하는 전략이다.
 
@@ -1256,6 +1265,7 @@ List<Order> findByOrderStatus(OrderStatus orderStatus);
 |--------------|----------------------------------------------------------|---------------------------|
 | 지연 로딩(Lazy)  | 연관된 엔티티를 실제로 사용하는 시점에 DB를 조회                             | 성능 최적화에 유리하나 `N + 1`문제 주의 |
 | 즉시 로딩(Eager) | 엔티티를 조회할 때 연관된 모든 엔티티도 함께 조회 | 간단하지만 과도한 조인이 발생할 수 있음.   |
+
 - - -
 ### Bean
 - Spring에서 Bean은 Spring IoC 컨테이너가 생성하고 관리하는 객체를 의미한다.
@@ -1291,6 +1301,7 @@ public class Car {
 - `Car`는 `Engine`에 의존하지만 직접 만들지 않는다.
 - `Engine`객체는 외부에서 주입되므로 유연성과 테스트 용이성을 가지게 된다.
 
+- - -
 ### 영속성
 **영속성?**
 - 데이터가 일시적이지 않고, 애플리케이션이 종료되어도 유지되는 특성을 의미한다.
