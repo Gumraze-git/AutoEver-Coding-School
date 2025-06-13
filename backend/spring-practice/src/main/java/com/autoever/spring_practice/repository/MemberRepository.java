@@ -5,16 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+// JPA Repository 인터페이스를 상속하여 Member 엔티티를 대상으로 id가 Long 타입인 CRUD 기능을 제공한다.
 public interface MemberRepository extends JpaRepository<Member, Long> {
     // 이메일 존재 여부 확인
     boolean existsByEmail(String email);
 
-    // 이메일로 회원 정보 가져오기
-    // Optional: null을 처리하기 위해 사용한다.
+    // 이메일 주소로 회원 정보를 조회
+    // 결과가 없을 수 있으므로 Optional<Member>로 반환하여 null 처리를 명확히 한다.
     Optional<Member> findByEmail(String email);
 
-    // 로그인 성공 실패를 위해서 email과 pwd가 존재하는지 확인
+    // 이메일과 비밀번호를 이용하여 회원 정보를 조회하며, 로그인 인증에 사용된다.
+    // 결과가 없을 수 있으므로 Optional<Member>로 반환한다.
     Optional<Member> findByEmailAndPassword(String email, String password);
-
-    String password(String password);
 }
