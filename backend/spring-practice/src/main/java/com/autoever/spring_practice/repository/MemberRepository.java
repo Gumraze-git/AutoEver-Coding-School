@@ -11,10 +11,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     boolean existsByEmail(String email);
 
     // 이메일 주소로 회원 정보를 조회
-    // 결과가 없을 수 있으므로 Optional<Member>로 반환하여 null 처리를 명확히 한다.
     Optional<Member> findByEmail(String email);
 
     // 이메일과 비밀번호를 이용하여 회원 정보를 조회하며, 로그인 인증에 사용된다.
-    // 결과가 없을 수 있으므로 Optional<Member>로 반환한다.
     Optional<Member> findByEmailAndPassword(String email, String password);
 }
