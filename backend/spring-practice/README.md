@@ -1268,9 +1268,42 @@ List<Order> findByOrderStatus(OrderStatus orderStatus);
 
 - - -
 ### Bean
-- Spring에서 Bean은 Spring IoC 컨테이너가 생성하고 관리하는 객체를 의미한다.
-- 주로 애플리케이션의 핵심 구성요소(Controller, Service, Repository 등)들이 Bean으로 등록되어 DI(의존성 주입)를 통해 사용된다.
+#### 사용 방법
+- 일반적으로 Java는 직접 `new` 키워드를 사용해서 객체를 생성한다.
+```java
+MemberService service = new MemberService();
+```
 
+- 하지만, Spring에서는 위와 같이 직접 만들지 않는다. 그 대신 다음과 같이 사용한다.
+```java
+@Autowired
+private MemberService memberService;
+```
+위처럼 선언하면, Spring이 알아서 이 객체를 생성하여 여기에 주입한다.  
+이때 Spring이 만들어서 관리하는 이 객체를 Bean이라고 한다.
+
+#### Bean?
+- Spring에서 Bean은 객체를 대신 만들어주고, 객체들끼리 연결도 하며, 생명주기도 관리한다.
+- 이러한 방식은 제어의 역전(IoC, Inversion of Control)이라 하며 Bean이 제어의 역전을 담당한다.
+  - 주로 애플리케이션의 핵심 구성요소(Controller, Service, Repository 등)들이 Bean으로 등록되어 DI(의존성 주입)를 통해 사용된다.
+
+**추가 예시**
+```java
+@Service
+public class MemberService {
+  ...
+}
+```
+위 코드는 Spring에게 이 클래스의 인스턴스를 Bean으로 등록해달라고 요청한다.
+
+그러면 Spring은 다음과 같이 동작한다.
+- `MemberService` 객체를 한 번만 만들어서 --> 싱글톤
+- 다른 클래스에서 다음과 같이 필요할 때마다 가져다 사용한다.
+```java
+@Autowired
+private MemberService memberService;
+```
+위 처럼 객체를 직접 만들지 않고도, 필요한 객체를 가져와 사용할 수 있는 장점을 Bean이 제공한다.
 - - -
 ### 의존성 주입(DI, Dependency Injection)
 - 객체가 의존하는 객체를 직접 생성하지 않고 외부(주로 Spring 컨테이너)가 대신 주입해주는 설계 패턴이다.
