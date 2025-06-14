@@ -3,8 +3,8 @@ package com.autoever.spring_practice.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.autoever.spring_practice.controller.BoardController;
 import com.autoever.spring_practice.controller.BoardResDto;
-import com.autoever.spring_practice.controller.BoradController;
 import com.autoever.spring_practice.dto.BoardWriteDto;
 import com.autoever.spring_practice.dto.PageResDto;
 import com.autoever.spring_practice.entity.Board;
@@ -24,7 +24,7 @@ import javax.transaction.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class BoardService {
-    private final BoradController boradController;
+    private final BoardController boardController;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
@@ -121,5 +121,16 @@ public class BoardService {
         Page<Board> boardPage = boardRepository.findAll(pageRequest);
         Page<BoardResDto> boardResDtoPage = boardPage.map(this::convertEntityToDto);
         return new PageResDto<>(boardResDtoPage);
+    }
+
+    // 게시글 전체 조회: 반환 값 List<Board>
+    public List<BoardResDto> getBoardList() {
+        List<Board> boards = boardRepository.findAll();
+        List<BoardResDto> boardResDtoList = new ArrayList<>();
+
+        for (Board board : boards) {
+            boardResDtoList.add(convertEntityToDto(board));
+        }
+        return boardResDtoList;
     }
 }
