@@ -1,0 +1,9 @@
+# 설정
+```properties
+server.port=8111
+
+spring.datasource.url=jdbc:mysql://localhost:3306/autoever_jpa_mysql_0605
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=4109
+```
