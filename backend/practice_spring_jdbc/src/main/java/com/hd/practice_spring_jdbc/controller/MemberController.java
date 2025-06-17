@@ -49,4 +49,15 @@ public class MemberController {
             return ResponseEntity.badRequest().body("[CUSTOM MSG] 회원 수정 실패");
         }
     }
+
+    // 회원 삭제
+    @DeleteMapping("/{email}")
+    public ResponseEntity<String> deleteMember(@PathVariable String email) {
+        boolean success = memberService.deleteMember(email);
+        if (success) {
+            return ResponseEntity.ok("회원 삭제 성공");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
