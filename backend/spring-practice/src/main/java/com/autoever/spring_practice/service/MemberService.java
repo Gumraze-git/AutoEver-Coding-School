@@ -1,7 +1,6 @@
 package com.autoever.spring_practice.service;
 
 import java.util.List;
-import com.autoever.spring_practice.dto.MemberReqDto;
 import com.autoever.spring_practice.dto.MemberResDto;
 import com.autoever.spring_practice.entity.Member;
 import com.autoever.spring_practice.repository.MemberRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -71,7 +69,7 @@ public class MemberService {
 
     // Entity -> DTO에 담는 메서드
     public MemberResDto convertEntityToDto(Member member) {
-        MemberResDto memberResDto = new MemberResDto();
+        MemberResDto memberResDto = new MemberResDto(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("name"), resultSet.getTimestamp("reg_date").toLocalDateTime());
         memberResDto.setEmail(member.getEmail());
         memberResDto.setName(member.getName());
         memberResDto.setPassword(member.getPassword());
