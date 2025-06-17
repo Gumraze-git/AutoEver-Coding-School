@@ -49,6 +49,11 @@ public class MemberDao {
         return jdbcTemplate.update(INSERT_MEMBER, memberDto.getName(), memberDto.getEmail(), memberDto.getPassword());
     }
 
+    // 회원 수정 메서드
+    public int updateMember(MemberDto memberDto) {
+        return jdbcTemplate.update(UPDATE_MEMBER, memberDto.getPassword(), memberDto.getName(), memberDto.getEmail());
+    }
+
     private static class MemberRowMapper implements RowMapper<MemberDto> {
         @Override
         public MemberDto mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
