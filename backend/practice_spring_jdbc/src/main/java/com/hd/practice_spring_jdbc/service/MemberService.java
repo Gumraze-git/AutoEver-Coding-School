@@ -5,6 +5,7 @@ import com.hd.practice_spring_jdbc.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,10 @@ public class MemberService {
     // 회원 추가
     public boolean insertMember(MemberDto memberDto) {
         return memberDao.insertMember(memberDto) > 0;
+    }
+
+    // 회원 정보 수정
+    public boolean updateMember(MemberDto memberDto) {
+        return memberDao.updateMember(memberDto) > 0;
     }
 }
