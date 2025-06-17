@@ -38,4 +38,15 @@ public class MemberController {
             return ResponseEntity.badRequest().body("[CUSTOM MSG] 회원 등록 실패");
         }
     }
+
+    // 회원 정보 수정
+    @PutMapping
+    public ResponseEntity<String> updateMember(@RequestBody MemberDto memberDto) {
+        boolean success = memberService.updateMember(memberDto);
+        if (success) {
+            return ResponseEntity.ok("[CUSTOM MSG] 회원 정보 수정 성공");
+        } else {
+            return ResponseEntity.badRequest().body("[CUSTOM MSG] 회원 수정 실패");
+        }
+    }
 }
