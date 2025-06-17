@@ -55,8 +55,8 @@ public class MemberDao {
     }
 
     // 회원 삭제 메서드
-    public int deleteMember(MemberDto memberDto) {
-        return jdbcTemplate.update(DELETE_MEMBER, memberDto.getEmail());
+    public boolean deleteMember(String email) {
+        return jdbcTemplate.update(DELETE_MEMBER, email) > 0;
     }
 
     private static class MemberRowMapper implements RowMapper<MemberDto> {
