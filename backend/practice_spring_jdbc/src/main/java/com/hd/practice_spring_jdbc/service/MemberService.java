@@ -26,4 +26,9 @@ public class MemberService {
         }
         return memberDao.findMemberByEmail(email);
     }
+
+    // 회원 추가
+    public boolean insertMember(MemberDto memberDto) {
+        return memberDao.insertMember(memberDto) > 0;
+    }
 }
