@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web' // 웹 MVC
 	developmentOnly 'org.springframework.boot:spring-boot-devtools' // spring boot dev tools
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' // spring boot starter test
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
