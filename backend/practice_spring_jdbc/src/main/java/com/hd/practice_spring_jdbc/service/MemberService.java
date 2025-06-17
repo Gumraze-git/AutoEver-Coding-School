@@ -37,4 +37,10 @@ public class MemberService {
     public boolean updateMember(MemberDto memberDto) {
         return memberDao.updateMember(memberDto) > 0;
     }
+
+    // 회원 정보 삭제
+    public boolean deleteMember(MemberDto memberDto) {
+        return memberDao.deleteMember(memberDto.getEmail()) > 0;
+    }
+
 }
