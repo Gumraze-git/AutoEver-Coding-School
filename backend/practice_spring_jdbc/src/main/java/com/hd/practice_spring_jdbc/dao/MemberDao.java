@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor // final 또는 @NotNull이 붙은 필드에 생성자를 자동으로 생성함.
 @Slf4j
 public class MemberDao {
-    private JdbcTemplate jdbcTemplate; // JDBC Template 의존성 주입
+    private final JdbcTemplate jdbcTemplate; // JDBC Template 의존성 주입
 
     // SQL문 작성
     // 전체 회원 조회
