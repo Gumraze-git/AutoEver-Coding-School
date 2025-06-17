@@ -37,7 +37,11 @@ public class MemberDao {
         return jdbcTemplate.query(SELECT_ALL_MEMBERS, new MemberRowMapper());
     }
 
-    //
+    // 이메일로 회원 조회 메서드
+    public List<MemberDto> findMemberByEmail(String email) {
+        return jdbcTemplate.query(SELECT_MEMBER_BY_EMAIL, new MemberRowMapper(), email);
+    }
+
     private static class MemberRowMapper implements RowMapper<MemberDto> {
         @Override
         public MemberDto mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
