@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor // final 또는 @NotNull이 붙은 필드에 생성자를 자동으로 생성함.
@@ -38,8 +39,14 @@ public class MemberDao {
     }
 
     // 이메일로 회원 조회 메서드
-    public List<MemberDto> findMemberByEmail(String email) {
-        return jdbcTemplate.query(SELECT_MEMBER_BY_EMAIL, new MemberRowMapper(), email);
+    public Optional<MemberDto> findMemberByEmail(String email) {
+        List<MemberDto> result = jdbcTemplate.query(SELECT_MEMBER_BY_EMAIL, new MemberRowMapper(), email);
+        return result.stream().findFirst(); // 비어 있으면 Optional.empty()
+    }
+
+    // 회원 등록 메서드
+    public int insertMember(MemberDto memberDto) {
+        return jdbcTemplate.update(INSERT_MEMBER, memberDto.getName(), memberDto.getEmail(), memberDto.getPassword());
     }
 
     private static class MemberRowMapper implements RowMapper<MemberDto> {
