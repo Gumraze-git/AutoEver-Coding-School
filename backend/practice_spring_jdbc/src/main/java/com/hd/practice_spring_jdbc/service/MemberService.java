@@ -41,7 +41,7 @@ public class MemberService {
     public boolean deleteMember(String email) {
         boolean result = memberDao.deleteMember(email);
         if (!result) {
-            log.warn("[CUSTOM ERROR MSG]: 해당 이메일이 존재하지 않음 -> {}", email)
+            log.warn("[CUSTOM ERROR MSG]: 해당 이메일이 존재하지 않음 -> {}", email);
         }
         return result;
     }
