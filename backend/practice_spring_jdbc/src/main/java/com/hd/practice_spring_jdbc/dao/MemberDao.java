@@ -54,6 +54,11 @@ public class MemberDao {
         return jdbcTemplate.update(UPDATE_MEMBER, memberDto.getPassword(), memberDto.getName(), memberDto.getEmail());
     }
 
+    // 회원 삭제 메서드
+    public int deleteMember(String email) {
+        return jdbcTemplate.update(DELETE_MEMBER, email);
+    }
+
     private static class MemberRowMapper implements RowMapper<MemberDto> {
         @Override
         public MemberDto mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
