@@ -4,10 +4,7 @@ import com.hd.practice_spring_jdbc.dto.MemberDto;
 import com.hd.practice_spring_jdbc.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +26,16 @@ public class MemberController {
         Optional<MemberDto> result = memberService.findMemberByEmail(email);
         return result.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    // 회원 등록
+    @PostMapping
+    public ResponseEntity<String> insertMember(@RequestBody MemberDto memberDto) {
+        boolean success = memberService.insertMember(memberDto);
+        if (success) {
+            return ResponseEntity.ok("[CUSTOM MSG] 회원 등록 성공");
+        } else {
+            return ResponseEntity.badRequest().body("[CUSTOM MSG] 회원 등록 실패");
+        }
     }
 }
