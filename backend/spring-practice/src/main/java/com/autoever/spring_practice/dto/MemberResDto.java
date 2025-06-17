@@ -1,14 +1,12 @@
 package com.autoever.spring_practice.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class MemberResDto {
     private String email;
     private String name;
