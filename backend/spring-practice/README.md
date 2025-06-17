@@ -1404,5 +1404,46 @@ em.persist(member);
 | @AllArgsConstructor      | 클래스         | 모든 필드를 인자로 받는 생성자 생성                                  |
 | @RequiredArgsConstructor | 클래스         | final 또는 @NonNull 필드만 생성자에 포함하여 생성                    |
 - - -
+## Spring Boot 프로젝트 생성 및 설정 순서
+1. 프로젝트 생성 및 환경 설정
+   - Spring Initializr을 이용하여 프로젝트 생성
+     - 필수 의존성 추가: Spring Web, Spring Data JPA, Lombok, MySQL Driver 등
+   - `application.properties` 설정
+     - DB 접속 정보
+     - 포트 번호
+     - JPA 설정
+   - `build.gradle` 설정
+2. 도메인 계층(Entity) 설계
+  - 핵심 비즈니스 객체 정의
+    - `Member`, `Item`, `Cart`, `Order`, `OrderItem` 등
+  - 연관 관계 매핑 설정
+    - `@OneToMany`, `@ManyToOne`, `@OneToOne`, `@ManyToMany`
+  - `Enum` 클래스 정의
+    - `ItemSellStatus`, `OrderStatus`
+3. 영속성 계층(Repository) 설계
+  - `JpaRepository<Entity, ID>` 상속하여 `Repository` 생성
+  - 커스텀 쿼리 메서드 정의
+  - 서비스 계층에서 DB 작성 및 저장을 위임할 수 있도록 인터페이스로 작성한다.
+4. DTO 정의
+  - 클라이언트 요청 및 응답에 사용할 DTO 생성함.
+    - `LoginReqDto`, `SignUpReqDto`, `MemberReqDto`, `MemberResDto`
+  - `Entity`와 분리하여 데이터 보안 및 응답 최적화 고려
+5. 애플리케이션 계층(Service) 설계
+  - `@Service`, `@Transactional` 선언
+  - DTO <-> Entity 변환 로직 구현
+  - `Repository`를 주입 받아 비즈니스 로직 수행
+    - `AuthService`, `MemberService`
+  - 프레젠테이션 계층과 도메인 계층 사이의 중재자 역할
+6. 프레젠테이션 계층(Controller) 설계
+  - `@RestController`, `@RequestMapping` 등 활용
+  - HTTP 요청을 수신하고 DTO에 바인딩하여 서비스 호출
+  - 응답 데이터를 DTO로 변환
+7. Swagger 설정
+  - Swagger 라이브러리 의존성 추가
+  - `SwaggerConfiguration` 클래스 작성
+  - API 문서 자동 생성 및 테스트
+8. 기능별 테스트 클래스 작성
+  - 각 단계별 검증을 위해 테스트 작성
+
 ## 참고 자료
 - https://www.baeldung.com/cs/layered-architecture
