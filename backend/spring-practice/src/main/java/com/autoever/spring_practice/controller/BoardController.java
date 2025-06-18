@@ -1,6 +1,7 @@
 package com.autoever.spring_practice.controller;
 
 import java.util.List;
+import com.autoever.spring_practice.dto.BoardResDto;
 import com.autoever.spring_practice.dto.BoardWriteDto;
 import com.autoever.spring_practice.dto.PageResDto;
 import com.autoever.spring_practice.service.BoardService;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
         "http://localhost:3000",
         "http://localhost:5173"
 })
-@RequestMapping("/borad")
+@RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;  // 의존성 주입
     // 게시글 등록 : 입력(BoardWriteDto), 반환(boolean)
@@ -48,7 +49,7 @@ public class BoardController {
     // 게시글 단건 조회 : 입력(id), 반환(BoardResDto)
     @GetMapping("/detail/{id}")
     public ResponseEntity<BoardResDto> getBoardDetail(@PathVariable Long id) {
-        return ResponseEntity.ok(boardService.getBoradById(id));
+        return ResponseEntity.ok(boardService.getBoardById(id));
     }
 
     // 게시글 페이징 : : 입력(페이지 번호, 페이지 사이즈), 반환(PageResDto)

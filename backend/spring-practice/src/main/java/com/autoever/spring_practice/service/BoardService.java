@@ -1,10 +1,6 @@
 package com.autoever.spring_practice.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.autoever.spring_practice.controller.BoardController;
-import com.autoever.spring_practice.controller.BoardResDto;
+import com.autoever.spring_practice.dto.BoardResDto;
 import com.autoever.spring_practice.dto.BoardWriteDto;
 import com.autoever.spring_practice.dto.PageResDto;
 import com.autoever.spring_practice.entity.Board;
@@ -16,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -24,8 +22,6 @@ import javax.transaction.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class BoardService {
-    private final BoardController boardController;
-    private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
@@ -66,7 +62,7 @@ public class BoardService {
     }
 
     // 게시글 단건 조회: 입력 게시글은 ID, 반환값 Board
-    public BoardResDto getBoradById(Long boardId) {
+    public BoardResDto getBoardById(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new RuntimeException("해당 게시물이 없습니다."));
         return convertEntityToDto(board);

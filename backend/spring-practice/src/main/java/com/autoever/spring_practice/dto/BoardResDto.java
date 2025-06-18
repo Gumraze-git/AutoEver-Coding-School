@@ -1,4 +1,4 @@
-package com.autoever.spring_practice.controller;
+package com.autoever.spring_practice.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
