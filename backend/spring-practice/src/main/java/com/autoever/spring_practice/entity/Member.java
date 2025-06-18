@@ -1,9 +1,7 @@
 package com.autoever.spring_practice.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.autoever.spring_practice.constant.Authority;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -11,7 +9,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "member")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString
 public class Member {
@@ -33,8 +32,22 @@ public class Member {
     private String image;
 
     private LocalDateTime regDate;
+
     @PrePersist                         // 엔티티가 DB에 저장되기 직전에 실행되는 메서드
     private void prePersist() {         // 라이프사이클 콜백 메서드
         regDate = LocalDateTime.now();  // regDate 필드에 현재 시간 자동 저장된다.
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @Builder
+    public Member(String name, String password, String email, String image, LocalDateTime regDate, Authority authority) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.authority = authority;
+        this.regDate = LocalDateTime.now();
     }
 }
