@@ -23,7 +23,6 @@ public class MemberDao {
         public MemberResDto mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             return new MemberResDto(
                     resultSet.getString("email"),
-                    resultSet.getString("password"),
                     resultSet.getString("name"),
                     resultSet.getString("image"),
                     resultSet.getTimestamp("reg_date").toLocalDateTime()
