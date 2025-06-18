@@ -27,7 +27,7 @@ public class MemberReqDto {
                 .build();
     }
 
-    public UsernamePasswordAuthenticationToken toAuthenticationToken() {
+    public UsernamePasswordAuthenticationToken toAuthentication() {
         return new UsernamePasswordAuthenticationToken(email, password);
     }
 }

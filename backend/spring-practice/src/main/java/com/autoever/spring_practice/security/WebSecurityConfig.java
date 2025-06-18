@@ -42,6 +42,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/auth/signup").permitAll()
+                .antMatchers("/auth/login").permitAll()
                 .antMatchers("/board/**").permitAll()
                 .antMatchers("/member/**").permitAll()
                 .antMatchers("/test/**").permitAll()

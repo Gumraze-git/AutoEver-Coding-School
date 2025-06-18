@@ -1,13 +1,19 @@
 package com.autoever.spring_practice.service;
 
+import ch.qos.logback.core.Context;
 import com.autoever.spring_practice.dto.MemberReqDto;
+import com.autoever.spring_practice.dto.MemberResDto;
 import com.autoever.spring_practice.dto.TokenDto;
 import com.autoever.spring_practice.entity.Member;
 import com.autoever.spring_practice.jwt.TokenProvider;
 import com.autoever.spring_practice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,8 +25,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 
 public class AuthService {
+    private final AuthenticationManagerBuilder managerBuilder; // 인증을 담당하는 클래스
     private final MemberRepository memberRepository; // 생성자를 통해 의존성 주입 받음.
     private final TokenProvider tokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     // MemberReqDto를 Member 엔티티로 수동 매핑함.
     private Member convertDtoToEntity(MemberReqDto memberReqDto) {
@@ -37,26 +45,18 @@ public class AuthService {
     }
 
     // 회원가입 요청 정보를 담고 있는 DTO을 받아, Member 엔티티로 변환 후 저장함.
-    public boolean signUp(MemberReqDto memberReqDto) {
-        try {
-            Member member = convertDtoToEntity(memberReqDto); // 회원가입 요청 정보를 담고 있는 Dto를 받아 Member 엔티티로 변환 후 저장함.
-            memberRepository.save(member);
-            return true;
-
-        } catch (Exception e) { // 예외 발생 false를 반환하고 로그에 오류 메시지를 출력함.
-            log.error("회원 가입 시 오류 발생: {}", e.getMessage());
-            return false;
+    public MemberResDto signUp(MemberReqDto memberReqDto) {
+        if (memberRepository.existsByEmail(memberReqDto.getEmail())) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
         }
+        Member member = memberReqDto.toEntity(passwordEncoder);
+        return MemberResDto.of(memberRepository.save(member));
     }
 
-    public TokenDto login(String email, String password) {
-        Member member = memberRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new RuntimeException("이메일 또는 비밀번호가 일치하지 않습니다."));
-
-        // Spring Security Authentication 객체 생성
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(email, password);
-
-        // JWT 토큰 생성 및 반환
-        return tokenProvider.generateTokenDto(authenticationToken);
+    // 로그인
+    public TokenDto login(MemberReqDto requestDto) {
+        UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
+        Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
+        return tokenProvider.generateTokenDto(authentication);
     }
 }

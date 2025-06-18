@@ -2,6 +2,7 @@ package com.autoever.spring_practice.controller;
 
 import com.autoever.spring_practice.dto.LoginReqDto;
 import com.autoever.spring_practice.dto.MemberReqDto;
+import com.autoever.spring_practice.dto.MemberResDto;
 import com.autoever.spring_practice.dto.TokenDto;
 import com.autoever.spring_practice.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +26,14 @@ public class AuthController {
 
     // 회원 가입
     @PostMapping("/signup") // body에 정보가 보여진다.
-    public ResponseEntity<Boolean> signUp(@RequestBody MemberReqDto memberReqDto) {
-        boolean isSuccess = authService.signUp(memberReqDto);
-        return ResponseEntity.ok(isSuccess);
+    public ResponseEntity<MemberResDto> signUp(@RequestBody MemberReqDto memberReqDto) {
+        return ResponseEntity.ok(authService.signUp(memberReqDto));
     }
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginReqDto loginReqDto) {
-        TokenDto tokenDto = authService.login(loginReqDto.getEmail(), loginReqDto.getPassword());
-        return ResponseEntity.ok(tokenDto);
+    public ResponseEntity<TokenDto> login(@RequestBody MemberReqDto memberReqDto) {
+        return ResponseEntity.ok(authService.login(memberReqDto));
     }
 
 }
