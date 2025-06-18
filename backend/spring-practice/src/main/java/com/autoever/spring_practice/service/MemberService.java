@@ -44,7 +44,6 @@ public class MemberService {
                     () -> new RuntimeException("해당 회원이 존재하지 않습니다.")
             );
             member.setEmail(memberResDto.getEmail());
-            member.setPassword(memberResDto.getPassword());
             memberRepository.save(member);
             return true;
         } catch (Exception e) {
@@ -69,14 +68,11 @@ public class MemberService {
 
     // Entity -> DTO에 담는 메서드
     public MemberResDto convertEntityToDto(Member member) {
-        MemberResDto memberResDto = new MemberResDto(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("name"), resultSet.getTimestamp("reg_date").toLocalDateTime());
-        memberResDto.setEmail(member.getEmail());
-        memberResDto.setName(member.getName());
-        memberResDto.setPassword(member.getPassword());
-        memberResDto.setRegDate(member.getRegDate());
-        memberResDto.setImage(member.getImage());
-        return memberResDto;
-
-
+        return MemberResDto.builder()
+                .email(member.getEmail())
+                .name(member.getName())
+                .image(member.getImage())
+                .regDate(member.getRegDate())
+                .build();
     }
 }
