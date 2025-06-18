@@ -2,6 +2,7 @@ package com.autoever.spring_practice.controller;
 
 import com.autoever.spring_practice.dto.LoginReqDto;
 import com.autoever.spring_practice.dto.MemberReqDto;
+import com.autoever.spring_practice.dto.TokenDto;
 import com.autoever.spring_practice.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +32,9 @@ public class AuthController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<Boolean> login(@RequestBody LoginReqDto loginReqDto) {
-        boolean isSuccess = authService.login(loginReqDto.getEmail(), loginReqDto.getPassword());
-        return ResponseEntity.ok(isSuccess);
+    public ResponseEntity<TokenDto> login(@RequestBody LoginReqDto loginReqDto) {
+        TokenDto tokenDto = authService.login(loginReqDto.getEmail(), loginReqDto.getPassword());
+        return ResponseEntity.ok(tokenDto);
     }
 
 }

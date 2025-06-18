@@ -1,10 +1,13 @@
 package com.autoever.spring_practice.service;
 
 import com.autoever.spring_practice.dto.MemberReqDto;
+import com.autoever.spring_practice.dto.TokenDto;
 import com.autoever.spring_practice.entity.Member;
+import com.autoever.spring_practice.jwt.TokenProvider;
 import com.autoever.spring_practice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,6 +20,7 @@ import java.util.Optional;
 
 public class AuthService {
     private final MemberRepository memberRepository; // 생성자를 통해 의존성 주입 받음.
+    private final TokenProvider tokenProvider;
 
     // MemberReqDto를 Member 엔티티로 수동 매핑함.
     private Member convertDtoToEntity(MemberReqDto memberReqDto) {
@@ -45,9 +49,14 @@ public class AuthService {
         }
     }
 
-    // 이메일과 비밀번호로 회원을 조회하고 존재 여부에 따라 로그인 성공 여부를 반환함.
-    public boolean login(String email, String password) {
-        Optional<Member> member = memberRepository.findByEmailAndPassword(email, password); // 내부적으로 findByEmailAndPassword() 호출
-        return member.isPresent(); // member의 존재 여부를 boolean으로 확인
+    public TokenDto login(String email, String password) {
+        Member member = memberRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new RuntimeException("이메일 또는 비밀번호가 일치하지 않습니다."));
+
+        // Spring Security Authentication 객체 생성
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(email, password);
+
+        // JWT 토큰 생성 및 반환
+        return tokenProvider.generateTokenDto(authenticationToken);
     }
 }
